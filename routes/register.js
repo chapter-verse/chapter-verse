@@ -6,7 +6,6 @@ const saltRounds = 10;
 router
 	.route('/')
 	.get((req, res) => res.render('register'))
-
 	.post((req, res) => {
 		const { username, email, password } = req.body;
 		bcrypt

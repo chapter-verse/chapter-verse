@@ -1,24 +1,43 @@
-<div id="form">
-  <h2>Sign Up</h2>
-  <form action="/auth/signup" method="POST">
+<div class='container'>
 
-    <label> Username
-      <input type="text" name="username" placeholder="Your username" />
-    </label>
+	<form action='/login' method='POST'>
 
-    <label> Email
-      <input type="email" name="email" placeholder="Your email" />
-    </label>
+		<div class='field'>
+			<p class='control has-icons-left has-icons-right'>
+				<input class='input is-medium' type='text' name='username' placeholder='Username' />
+				<span class='icon is-small is-left'>
+					<i class='fas fa-user'></i>
+				</span>
+			</p>
+		</div>
+		<div class='field'>
+			<p class='control has-icons-left has-icons-right'>
+				<input class='input is-medium' type='email' name='email' placeholder='Email' />
+				<span class='icon is-small is-left'>
+					<i class='fas fa-envelope'></i>
+				</span>
 
-    <label> Password
-      <input type="password" name="password" placeholder="Your password" />
-    </label>
+			</p>
 
-    <button type="submit">Sign Up</button>
+		</div>
+		<div class='field'>
+			<p class='control has-icons-left'>
+				<input class='input is-medium' type='password' name='password' placeholder='Password' />
+				<span class='icon is-small is-left'>
+					<i class='fas fa-lock'></i>
+				</span>
+			</p>
+		</div>
+		<div class='field'>
+			<p class='control'>
+				<button class='button is-success'>
+					Register
+				</button>
+			</p>
+		</div>
 
+		<p>Already have an Account?</p>
+		<a href='/login'>Login</a>
+	</form>
 
-    {{#if errorMessage}}
-      <p class="error">{{errorMessage}}</p>
-    {{/if}}
-  </form>
 </div>

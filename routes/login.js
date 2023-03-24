@@ -6,7 +6,6 @@ const bcrypt = require('bcrypt');
 router
 	.route('/')
 	.get((req, res) => res.render('login'))
-
 	.post(async (req, res, next) => {
 		const { username, password } = req.body;
 		try {

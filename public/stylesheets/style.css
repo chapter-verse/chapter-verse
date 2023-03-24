@@ -1,6 +1,7 @@
 body {
 	margin: 0;
 	font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
+	height: 100%;
 }
 
 a {
@@ -8,10 +9,9 @@ a {
 }
 
 .homepage-wrapper {
-	position: relative;
 	z-index: -1;
 	width: 100vw;
-	height: 100%;
+	height: 100vh;
 	background: url('../images/cover.jpg');
 	background-size: cover;
 	background-repeat: no-repeat;

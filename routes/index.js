@@ -4,19 +4,15 @@ const axios = require('axios');
 
 router
 	.route('/')
-	.get((req, res) => {
-		const options = {
-			method: 'GET',
-			url: 'https://api.myanimelist.net/v2/anime/10357?fields=rank,mean,alternative_titles',
-			headers: {
-				'X-MAL-CLIENT-ID': '2219547a216caad76b4dcdcc1703f964',
-			},
-		};
-
-		axios
-			.request(options)
-			.then((response) => res.render('index', response))
-			.catch((error) => console.error(error));
+	.get(async (req, res) => {
+		try {
+			const response = await axios.get('https://www.googleapis.com/books/v1/volumes?q=isbn:0747532699');
+			const data = response.data.items[0].volumeInfo;
+			res.render('index', data);
+		} catch (error) {
+			console.log(error);
+			res.status(500).json({ error: 'Internal Server Error' });
+		}
 	})
 	.post((req, res) => {});
 

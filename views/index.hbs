@@ -10,49 +10,13 @@
 				<div class='my-6'>
 
 					<h1 class='subtitle is-1 my-6'>Welcome, {{session.currentUser.username}}</h1>
+					<h2 class='subtitle is-2'>{{title}}</h2>
+
 				</div>
 			</div>
 
 		</nav>
+		<div class='container'>{{description}}</div>
 	{{/if}}
 
 </div>
-
-{{!-- <div class='container'>
-	<div class='columns is-centered'>
-		<div class='column is-one-quarter'>
-			<div class='card'>
-				<div class='card-image'>
-					<figure class='image is-4by3'>
-						<img src='{{data.main_picture.large}}' alt='{{data.title}}' />
-					</figure>
-				</div>
-				<div class='card-content'>
-					<div class='media'>
-						<div class='media-left'>
-							<figure class='image is-48x48'>
-								<img src='{{data.main_picture.large}}' alt='{{data.title}}' />
-							</figure>
-						</div>
-						<div class='media-content'>
-
-							<p class='title is-5'>{{data.alternative_titles.en}}</p>
-
-						</div>
-					</div>
-
-					<div class='content'>
-						<p class='title is-6'>Rank: {{data.rank}}</p>
-
-						<time datetime='2016-1-1'>11:09 PM - 1 Jan 2016</time>
-
-					</div>
-					<div class='content'>
-						<p class='title is-7'>Rating: {{data.mean}}</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-</div> --}}

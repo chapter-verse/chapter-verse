@@ -56,9 +56,10 @@
 								<a class='button is-primary' href='/profile'>
 									<strong>{{session.currentUser.username}}</strong>
 								</a>
-								<a class='button is-light' href='/logout'>
-									Log out
-								</a>
+								<form action='/logout' method='POST' style='margin:0'>
+									<button class='button is-light'>Log out</button>
+								</form>
+
 							</div>
 						</div>
 					{{else}}

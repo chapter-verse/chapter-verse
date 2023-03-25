@@ -24,6 +24,8 @@ app.use('/register', require('./routes/register'));
 
 app.use('/profile', require('./routes/profile'));
 
+app.use('/logout', require('./routes/logout'));
+
 require('./error-handling')(app);
 
 module.exports = app;

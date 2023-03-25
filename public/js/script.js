@@ -1,4 +1,9 @@
-// https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
-document.addEventListener("DOMContentLoaded", () => {
-  console.log("Chapter-Verse JS imported successfully!");
+document.addEventListener('DOMContentLoaded', () => {
+	(document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+		const $notification = $delete.parentNode;
+
+		$delete.addEventListener('click', () => {
+			$notification.parentNode.removeChild($notification);
+		});
+	});
 });

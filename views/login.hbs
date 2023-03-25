@@ -3,6 +3,18 @@
 	<form action='/login' method='POST'>
 
 		<div class='field'>
+			{{#if errorMessage}}
+				<div class='notification is-danger is-light'>
+					<button class='delete'></button>
+					{{errorMessage}}
+				</div>
+			{{/if}}
+			{{#if message}}
+				<div class='notification is-success'>
+					<button class='delete'></button>
+					Account created successfuly. You can now Login.
+				</div>
+			{{/if}}
 			<p class='control has-icons-left has-icons-right'>
 				<input class='input is-medium' type='text' name='username' placeholder='Username' />
 				<span class='icon is-small is-left'>

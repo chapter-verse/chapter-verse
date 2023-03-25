@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
+const { GoogleBooksAPI } = require('google-books-js');
+const googleBooksApi = new GoogleBooksAPI();
 
 router
 	.route('/')
@@ -15,5 +17,19 @@ router
 		}
 	})
 	.post((req, res) => {});
+
+async function fetchBooks() {
+	const books = await googleBooksApi.search({
+		filters: {
+			title: 'Fire and Blood',
+		},
+	});
+
+	console.log(books.items[0].volumeInfo.title);
+	console.log(books.items[0].volumeInfo.subtitle);
+	console.log(books.items[0].volumeInfo.authors);
+}
+
+fetchBooks();
 
 module.exports = router;

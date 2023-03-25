@@ -52,7 +52,11 @@
 				</div>
 				{{#if session.currentUser}}
 					<div class='navbar-end'>
-						<a href='/profile' id='userLink' class='navbar-item is-size-4 has-text-info mx-5'>
+						<a
+							href='/profile/{{session.currentUser.username}}'
+							id='userLink'
+							class='navbar-item is-size-4 has-text-info mx-5'
+						>
 							{{session.currentUser.username}}
 						</a>
 						<div class='buttons'>

@@ -10,13 +10,18 @@
 				<div class='my-6'>
 
 					<h1 class='subtitle is-1 my-6'>Welcome, {{session.currentUser.username}}</h1>
-					<h2 class='subtitle is-2'>{{title}}</h2>
 
 				</div>
 			</div>
 
 		</nav>
-		<div class='container'>{{description}}</div>
+		<div class='container'>
+			{{#each books.items}}
+				<div class='block'>
+					<p>{{volumeInfo.title}}</p>
+				</div>
+			{{/each}}
+		</div>
 	{{/if}}
 
 </div>

@@ -8,28 +8,25 @@ router
 	.route('/')
 	.get(async (req, res) => {
 		try {
-			const response = await axios.get('https://www.googleapis.com/books/v1/volumes?q=isbn:0747532699');
-			const data = response.data.items[0].volumeInfo;
-			res.render('index', data);
-		} catch (error) {
-			console.log(error);
-			res.status(500).json({ error: 'Internal Server Error' });
+			const books = await fetchBooks();
+			console.log(books.items.length);
+			res.render('index', { books });
+		} catch (err) {
+			console.log(err.message);
 		}
 	})
 	.post((req, res) => {});
 
-async function fetchBooks() {
+async function fetchBooks(value) {
 	const books = await googleBooksApi.search({
 		filters: {
-			title: 'Fire and Blood',
+			title: value || ' ',
+			author: value || ' ',
+			subject: value || ' ',
 		},
 	});
 
-	console.log(books.items[0].volumeInfo.title);
-	console.log(books.items[0].volumeInfo.subtitle);
-	console.log(books.items[0].volumeInfo.authors);
+	return books;
 }
-
-fetchBooks();
 
 module.exports = router;

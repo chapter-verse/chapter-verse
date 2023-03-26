@@ -35,12 +35,10 @@ userSchema.pre('save', async function (next) {
 		if (!isLength(this.password, { min: 3 })) {
 			return next(new Error('Password must have at least 3 characters.'));
 		}
-
 		const salt = await bcrypt.genSalt(saltRounds);
 		const hash = await bcrypt.hash(this.password, salt);
 		this.password = hash;
 	}
-
 	next();
 });
 

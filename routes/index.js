@@ -1,32 +1,19 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
-const { GoogleBooksAPI } = require('google-books-js');
-const googleBooksApi = new GoogleBooksAPI();
 
 router
 	.route('/')
 	.get(async (req, res) => {
-		try {
-			const books = await fetchBooks();
-			console.log(books.items.length);
+		if (req.query.search) {
+			const response = await axios.get(
+				`https://www.googleapis.com/books/v1/volumes?q=${req.query.search}&key=${process.env.KEY}`,
+			);
+			const books = response.data.items;
+
 			res.render('index', { books });
-		} catch (err) {
-			console.log(err.message);
-		}
+		} else res.render('index');
 	})
 	.post((req, res) => {});
-
-async function fetchBooks(value) {
-	const books = await googleBooksApi.search({
-		filters: {
-			title: value || ' ',
-			author: value || ' ',
-			subject: value || ' ',
-		},
-	});
-
-	return books;
-}
 
 module.exports = router;

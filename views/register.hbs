@@ -1,63 +1,63 @@
 <form action='/register' method='POST'>
-	<div class='columns is-flex is-flex-direction-column is-centered my-6'>
-		<div class='container my-6'>
-			<div class='column'>
-				<div class='field'>
-					<p class='subtitle is-3 has-text-centered'>Register</p>
-				</div>
-				<div class='field'>
-					<p class='control has-icons-left has-icons-right'>
-						<input class='input is-medium' type='text' name='username' placeholder='Username' />
-						<span class='icon is-small is-left'>
-							<i class='fas fa-user'></i>
-						</span>
-					</p>
-				</div>
+	<div class='columns is-flex is-flex-direction-column is-align-items-center my-6'>
+
+		<div class='column is-4'>
+			<div class='field'>
+				<p class='subtitle is-3 has-text-centered white mb-5'>Register</p>
 			</div>
-			<div class='column'>
-				<div class='field'>
-					<p class='control has-icons-left has-icons-right'>
-						<input class='input is-medium' type='text' name='email' placeholder='Email' />
-						<span class='icon is-small is-left'>
-							<i class='fas fa-envelope'></i>
-						</span>
-					</p>
-				</div>
-			</div>
-			<div class='column'>
-				<div class='field'>
-					<p class='control has-icons-left'>
-						<input class='input is-medium' type='password' name='password' placeholder='Password' />
-						<span class='icon is-small is-left'>
-							<i class='fas fa-lock'></i>
-						</span>
-					</p>
-				</div>
-			</div>
-			{{#if errorMessage}}
-				<div class='column'>
-					<div class='field'>
-						<div class='notification is-danger is-light has-text-centered'>
-							{{errorMessage}}
-						</div>
-					</div>
-				</div>
-			{{/if}}
-			<div class='column is-flex is-justify-content-center'>
-				<div class='field'>
-					<p class='control'>
-						<button class='button is-success'>
-							Register
-						</button>
-					</p>
-				</div>
-			</div>
-			<div class='column is-flex is-justify-content-center has-text-centered is-size-5'>
-				<div class='field'>
-					<p>Already have an Account?</p>
-					<a href='/login'>Sign In</a>
-				</div>
+			<div class='field'>
+				<p class='control has-icons-left has-icons-right'>
+					<input class='input is-medium' type='text' name='username' placeholder='Username' />
+					<span class='icon is-small is-left'>
+						<i class='fas fa-user'></i>
+					</span>
+				</p>
 			</div>
 		</div>
+		<div class='column is-4'>
+			<div class='field'>
+				<p class='control has-icons-left has-icons-right'>
+					<input class='input is-medium' type='text' name='email' placeholder='Email' />
+					<span class='icon is-small is-left'>
+						<i class='fas fa-envelope'></i>
+					</span>
+				</p>
+			</div>
+		</div>
+		<div class='column is-4'>
+			<div class='field'>
+				<p class='control has-icons-left'>
+					<input class='input is-medium' type='password' name='password' placeholder='Password' />
+					<span class='icon is-small is-left'>
+						<i class='fas fa-lock'></i>
+					</span>
+				</p>
+			</div>
+		</div>
+		{{#if errorMessage}}
+			<div class='column'>
+				<div class='field'>
+					<div class='notification is-danger is-light has-text-centered'>
+						{{errorMessage}}
+					</div>
+				</div>
+			</div>
+		{{/if}}
+		<div class='column is-flex is-justify-content-center'>
+			<div class='field'>
+				<p class='control'>
+					<button class='button is-success px-5'>
+						Register
+					</button>
+				</p>
+			</div>
+		</div>
+		<div class='column is-flex is-justify-content-center has-text-centered is-size-5'>
+			<div class='field'>
+				<p class='white'>Already have an Account?</p>
+				<a href='/login'>Sign In</a>
+			</div>
+		</div>
+
 	</div>
 </form>

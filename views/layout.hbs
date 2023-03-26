@@ -10,10 +10,10 @@
 		<script defer src='https://apis.google.com/js/api.js'></script>
 	</head>
 	<body>
-		<nav class='navbar is-dark' role='navigation' aria-label='main navigation'>
+		<nav class='navbar' role='navigation' aria-label='main navigation'>
 			<div class='navbar-brand'>
-				<a id='logoAnchor' class='navbar-item' href='/'>
-					<img id='logo' src='../images/logo.png' width='38' height='68' />
+				<a class='navbar-item no-hover' href='/'>
+					<img id='logo' src='../images/logo.png' width='28' height='68' />
 				</a>
 
 				<a role='button' class='navbar-burger' aria-label='menu' aria-expanded='false' data-target='navbarBasicExample'>
@@ -52,17 +52,12 @@
 				</div>
 				{{#if session.currentUser}}
 					<div class='navbar-end'>
-						<a
-							href='/profile/{{session.currentUser.username}}'
-							id='userLink'
-							class='navbar-item is-size-4 has-text-info mx-5'
-						>
-							{{session.currentUser.username}}
-						</a>
 						<div class='buttons'>
-
+							<form action='/profile/{{session.currentUser.username}}' style='margin:0;'>
+								<button class='button is-link is-inverted mr-4 is-size-5 no-hover'>{{session.currentUser.username}}</button>
+							</form>
 							<form action='/logout' method='POST' style='margin:0;'>
-								<button id='logoutButton' class='button is-danger is-outlined mr-6'>Logout</button>
+								<button class='button is-danger is-inverted mr-4 is-size-5 no-hover'>Logout</button>
 							</form>
 						</div>
 					</div>
@@ -71,7 +66,7 @@
 					<div class='navbar-end'>
 						<div class='buttons'>
 
-							<a href='/login' class='button is-primary mr-6 is-outlined'>Login</a>
+							<a href='/login' class='button is-primary mr-4'>Login</a>
 						</div>
 					</div>
 				{{/if}}

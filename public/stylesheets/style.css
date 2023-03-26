@@ -30,6 +30,13 @@ a {
 	filter: invert(100);
 }
 
+#logoAnchor:hover {
+	background: transparent;
+}
+#logoAnchor:focus {
+	background: transparent;
+}
+
 #userLink:hover {
 	background: transparent;
 	transition: all ease 150ms;

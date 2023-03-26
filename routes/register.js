@@ -6,26 +6,27 @@ const saltRounds = 10;
 router
 	.route('/')
 	.get((req, res) => res.render('register'))
-	.post((req, res) => {
+	.post(async (req, res) => {
 		const { username, email, password } = req.body;
-		bcrypt
-			.genSalt(saltRounds)
-			.then((salt) => bcrypt.hash(password, salt))
-			.then((hashedPassword) => {
-				return User.create({
-					username,
-					email,
-					password: hashedPassword,
-				});
-			})
-			.then(() => {
-				res.render('login', { message: 'Account created, please log in.' });
-			})
-			.catch((error) => {
-				if (error.message.includes('E11000')) {
-					res.render('register', { errorMessage: 'Username or Password already exist.' });
-				} else res.render('register', { errorMessage: 'An error occured.' });
+		try {
+			await User.create({
+				username,
+				email,
+				password,
 			});
+			res.render('login', { message: 'Account created, please Sign In.' });
+		} catch (error) {
+			if (error.message.includes('E11000')) {
+				res.render('register', { errorMessage: 'Username or Email already exists.' });
+			} else if (!username && !password && !email) {
+				res.render('register', { errorMessage: 'Please fill out all the required fields.' });
+			} else if (error.errors) {
+				for (let key in error.errors) {
+					const message = error.errors[key].message;
+					res.render('register', { errorMessage: message });
+				}
+			}
+		}
 	});
 
 module.exports = router;

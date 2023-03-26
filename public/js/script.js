@@ -1,9 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
-	(document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
-		const $notification = $delete.parentNode;
-
-		$delete.addEventListener('click', () => {
-			$notification.parentNode.removeChild($notification);
-		});
+	(document.querySelectorAll('.notification') || []).forEach((notification) => {
+		setTimeout(() => {
+			notification.classList.add('fade-out');
+			notification.addEventListener(
+				'animationend',
+				() => {
+					notification.remove();
+				},
+				{ once: true },
+			);
+		}, 2000);
 	});
 });

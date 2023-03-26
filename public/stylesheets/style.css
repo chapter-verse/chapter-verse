@@ -46,3 +46,16 @@ a {
 	background: transparent;
 	transition: all ease 150ms;
 }
+
+.notification.fade-out {
+	animation: fade-out 2s;
+}
+
+@keyframes fade-out {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}

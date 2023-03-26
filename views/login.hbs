@@ -1,24 +1,12 @@
 <form action='/login' method='POST'>
 	<div class='columns is-flex is-flex-direction-column is-centered my-6'>
 		<div class='container my-6'>
+
 			<div class='column'>
 				<div class='field'>
 					<p class='subtitle is-3 has-text-centered'>Sign In</p>
 				</div>
-				<div class='field'>
-					{{#if errorMessage}}
-						<div class='notification is-danger is-light'>
-							<button class='delete'></button>
-							{{errorMessage}}
-						</div>
-					{{/if}}
-					{{#if message}}
-						<div class='notification is-success'>
-							<button class='delete'></button>
-							Account created successfuly. You can now Sign In.
-						</div>
-					{{/if}}
-				</div>
+
 				<div class='field'>
 					<p class='control has-icons-left has-icons-right'>
 						<input class='input is-medium' type='text' name='username' placeholder='Username' />
@@ -38,11 +26,30 @@
 					</p>
 				</div>
 			</div>
+			{{#if errorMessage}}
+				<div class='column'>
+					<div class='field'>
+						<div class='notification is-danger is-light has-text-centered'>
+							{{errorMessage}}
+						</div>
+
+					</div>
+				</div>
+			{{/if}}
+			{{#if message}}
+				<div class='column'>
+					<div class='field'>
+						<div class='notification is-success has-text-centered'>
+							Account created successfuly. You can now Sign In.
+						</div>
+					</div>
+				</div>
+			{{/if}}
 			<div class='column is-flex is-justify-content-center'>
 				<div class='field'>
 					<p class='control'>
 						<button class='button is-success'>
-							Login
+							Sign In
 						</button>
 					</p>
 				</div>
@@ -53,6 +60,7 @@
 					<a href='/register'>Register</a>
 				</div>
 			</div>
+
 		</div>
 	</div>
 </form>

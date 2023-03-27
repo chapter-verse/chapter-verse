@@ -28,6 +28,8 @@ app.use('/logout', require('./routes/logout'));
 
 app.use('/books', require('./routes/books'));
 
+app.use('/books', require('./routes/collection'));
+
 require('./error-handling')(app);
 
 module.exports = app;

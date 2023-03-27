@@ -38,6 +38,9 @@ const userSchema = new Schema(
 				ref: 'Collection',
 			},
 		],
+		avatar: {
+			type: String
+		}
 	},
 	{
 		timestamps: true,

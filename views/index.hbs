@@ -12,7 +12,7 @@
 
 		</nav>
 	{{/if}}
-	<div class='container is-flex is-justify-content-center mt-6'>
+	<div class='container is-flex is-justify-content-center my-6'>
 		<form action='/' method='GET'>
 			<div class='field has-addons'>
 				<div class='control'>
@@ -30,33 +30,29 @@
 		</form>
 	</div>
 	{{#if books}}
-		<div class='columns is-centered is-flex is-flex-wrap-wrap'>
-			{{#each books}}
-				<div class='column is-2 m-6'>
-					<div class='card'>
-						<div class='card-image'>
-							<figure class='image is-square'>
-								<img src='{{volumeInfo.imageLinks.thumbnail}}' alt='{{volumeInfo.title}}' />
-							</figure>
-						</div>
-						<div class='card-content'>
-							<div class='media'>
-								<div class='media-left'>
-									<figure class='image is-48x48'>
-										<img src='{{volumeInfo.imageLinks.smallThumbnail}}' alt='{{volumeInfo.title}}' />
+		<section class='container'>
+			<div class='columns features is-flex is-flex-wrap-wrap'>
+				{{#each books}}
+					{{#if volumeInfo.imageLinks.thumbnail}}
+						<div class='column is-4 modal-button' data-target='modal-card'>
+							<div class='card is-shady'>
+								<div class='card-image'>
+									<figure class='image is-4by3'>
+										<img src='{{volumeInfo.imageLinks.thumbnail}}' alt='{{volumeInfo.title}}' />
 									</figure>
 								</div>
-								<div class='media-content'>
-									<p class='subtitle is-5'>{{volumeInfo.title}}</p>
-									<p class='subtitle is-6'>{{volumeInfo.authors}}</p>
+								<div class='card-content'>
+									<div class='content'>
+										<h4>{{volumeInfo.title}}</h4>
+										<p>{{volumeInfo.authors}}</p>
+										<span class='button is-warning modal-button'>Details</span>
+									</div>
 								</div>
 							</div>
-							<div class='content'>
-							</div>
 						</div>
-					</div>
-				</div>
-			{{/each}}
-		</div>
+					{{/if}}
+				{{/each}}
+			</div>
+		</section>
 	{{/if}}
 </div>

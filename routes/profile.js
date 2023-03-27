@@ -11,23 +11,32 @@ router.get('/:username', (req, res) => {
 
 module.exports = router;
 
-router.get('/:username/edit-profil', (req, res) => {
-	const { username } = req.params;
-	User.findOne({ username })
-		.then((data) => res.render('edit-profil', data))
-		.catch((err) => console.log(err));
+router.get('/:userId/edit', (req, res, next) => {
+	const {userId} = req.params;
+	// console.log(req)
+	User.findById(userId)
+	.then((data) => {res.render('edit-profile', data)
+		console.log(data)
+})
+	.catch((err) => {
+		console.log(err)
+		next(err)
+	});
 });
 
-router.get("/:username/edit-profil", (req, res, next) => {
-
-	User.find()
-	  .then( authorsArr => {
-		
-		const data = {
-		  authors: authorsArr
-		}
+router.post('/:userId/edit', (req, res, next) => {
+	console.log(req.params)
+	console.log(req.body)
+	console.log(req.session)
+	const {userId} = req.params;
+	const { username, description, birthday } = req.body;
   
-		res.render("profile", data);
+	User.findByIdAndUpdate(userId, {username, description, birthday}, { new: true })
+	  .then(() => {
+		res.redirect(`/profile/${username}`); 
 	  })
-	  .catch((err) => console.log(err));
+	  .catch((err) => {
+		console.log(err)
+		next(err)
+	});
   });

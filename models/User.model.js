@@ -32,9 +32,12 @@ const userSchema = new Schema(
 			type: String,
 			required: false,
 		},
-		collections : {
+		collections: {
 			type: Schema.Types.ObjectId, 
  		    ref: 'Collection'
+		}
+		picture: {
+			type: 
 		}
 	},
 	{

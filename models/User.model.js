@@ -24,6 +24,18 @@ const userSchema = new Schema(
 			required: [true, 'Please enter a Password'],
 			minlength: [3, 'Password must have at least 3 characters.'],
 		},
+		birthday: {
+			type: Date,
+			required: false,
+		},
+		description: {
+			type: String,
+			required: false,
+		},
+		collections : {
+			type: Schema.Types.ObjectId, 
+ 		    ref: 'Collection'
+		}
 	},
 	{
 		timestamps: true,

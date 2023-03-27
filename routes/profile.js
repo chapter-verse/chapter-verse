@@ -11,9 +11,23 @@ router.get('/:username', (req, res) => {
 
 module.exports = router;
 
-router.get('/:username/preferences', (req, res) => {
+router.get('/:username/edit-profil', (req, res) => {
 	const { username } = req.params;
 	User.findOne({ username })
-		.then((data) => res.render('preferences', data))
+		.then((data) => res.render('edit-profil', data))
 		.catch((err) => console.log(err));
 });
+
+router.get("/:username/edit-profil", (req, res, next) => {
+
+	User.find()
+	  .then( authorsArr => {
+		
+		const data = {
+		  authors: authorsArr
+		}
+  
+		res.render("profile", data);
+	  })
+	  .catch((err) => console.log(err));
+  });

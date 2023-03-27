@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 
+
 const collectionSchema = new Schema(
 	{
 		name: {
@@ -10,9 +11,10 @@ const collectionSchema = new Schema(
 			type: String,
 			required: false,
 		},
-		books: {
-			//   books from API
-		},
+		books:{
+			type: [String],
+			required: false,
+		}
 	},
 	{
 		timestamps: true,

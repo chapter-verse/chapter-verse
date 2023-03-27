@@ -32,10 +32,12 @@ const userSchema = new Schema(
 			type: String,
 			required: false,
 		},
-		collections : {
-			type: Schema.Types.ObjectId, 
- 		    ref: 'Collection'
-		}
+		collections: [
+			{
+				type: Schema.Types.ObjectId,
+				ref: 'Collection',
+			},
+		],
 	},
 	{
 		timestamps: true,

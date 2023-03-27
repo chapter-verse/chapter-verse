@@ -1,6 +1,5 @@
 const { Schema, model } = require('mongoose');
 
-
 const collectionSchema = new Schema(
 	{
 		name: {
@@ -11,10 +10,15 @@ const collectionSchema = new Schema(
 			type: String,
 			required: false,
 		},
-		books:{
+		books: {
 			type: [String],
 			required: false,
-		}
+		},
+		user: {
+			type: Schema.Types.ObjectId,
+			ref: 'User',
+			required: true,
+		},
 	},
 	{
 		timestamps: true,

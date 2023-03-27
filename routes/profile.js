@@ -13,7 +13,6 @@ module.exports = router;
 
 router.get('/:userId/edit', (req, res, next) => {
 	const {userId} = req.params;
-	// console.log(req)
 	User.findById(userId)
 	.then((data) => {res.render('edit-profile', data)
 		console.log(data)

@@ -7,7 +7,7 @@ router
 	.get(async (req, res) => {
 		if (req.query.search) {
 			const response = await axios.get(
-				`https://www.googleapis.com/books/v1/volumes?q=${req.query.search}&maxResults=40&langRestrict=en&key=${process.env.KEY}`,
+				`https://www.googleapis.com/books/v1/volumes?q=${req.query.search}&filter=partial&maxResults=40&key=${process.env.KEY}`,
 				{
 					headers: {
 						'Referrer-Policy': 'no-referrer-when-downgrade',
@@ -15,6 +15,7 @@ router
 				},
 			);
 			const books = response.data.items;
+			console.log(books);
 			res.render('index', { books });
 		} else {
 			res.render('index');

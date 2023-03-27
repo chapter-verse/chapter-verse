@@ -34,18 +34,22 @@
 			<div class='columns features is-flex is-flex-wrap-wrap'>
 				{{#each books}}
 					{{!-- {{#if volumeInfo.imageLinks.thumbnail}} --}}
-					<div class='column is-4 modal-button' data-target='modal-card'>
+					<div class='column is-3 modal-button' data-target='modal-card'>
 						<div class='card is-shady'>
 							<div class='card-image'>
-								<figure class='image is-4by3'>
+								<figure class='image is-1by1'>
 									<img src='{{volumeInfo.imageLinks.thumbnail}}' alt='{{volumeInfo.title}}' />
 								</figure>
 							</div>
 							<div class='card-content'>
 								<div class='content'>
-									<h4>{{volumeInfo.title}}</h4>
-									<p>{{volumeInfo.authors}}</p>
-									<span class='button is-warning modal-button'>Details</span>
+									<h4
+										style='height: 1.5rem;white-space: nowrap;overflow: hidden;text-overflow: ellipsis '
+									>{{volumeInfo.title}}</h4>
+									<p
+										style='height: 1.5rem;white-space: nowrap;overflow: hidden;text-overflow: ellipsis'
+									>{{volumeInfo.authors}}</p>
+									<a href='https://www.googleapis.com/books/v1/volumes/{{id}}' class='button is-warning modal-button'>Details</a>
 								</div>
 							</div>
 						</div>

@@ -1,3 +1,4 @@
+{{log book}}
 <section class='hero' >
 	<div class='hero-body' >
 		<div class='container ' >
@@ -10,7 +11,7 @@
 			</div>
             <div class='content is-medium is-flex is-justify-content-center '>
                 <div class="buttons">
-                             <a href="#" class="button is-warning is-medium">Preview</a>
+                             <a href="{{book.imageLinks.previewLink}}" class="button is-warning is-medium">Preview</a>
                              <a href="#" class="button is-info is-medium js-modal-trigger" data-target="addToCollection">Add to Collection</a>
                              <a href="#" class="button is-success is-medium">Add to Favourites</a>
                 </div>
@@ -21,14 +22,14 @@
 						<div class='content is-medium'>
 							<h2 class='subtitle is-4'>{{book.volumeInfo.authors}}</h2>
 							<h1 class='title  '>{{book.volumeInfo.title}}</h1>
-                             <i><h4 class="subtitle ">{{book.volumeInfo.subtitle}}</h4></i>
-							 <i><h5 class='subtitle  is-5 '> {{book.volumeInfo.categories}}</h4></i>
+                <i><h4 class="subtitle ">{{book.volumeInfo.subtitle}}</h4></i>
+							  <i><h5 class='subtitle  is-5 '> {{book.volumeInfo.categories}}</h4></i>
 							<p class='subtitle mt-6 '>{{{book.volumeInfo.description}}}</p>
 						</div>
 					</div>
 				</div>
                  <div class="buttons is-flex is-justify-content-center">
-                             <a href="#" class="button is-warning is-medium">Preview</a>
+                             <a href="{{book.imageLinks.previewLink}}" class="button is-warning is-medium">Preview</a>
                              <a href="#" class="button is-info is-medium js-modal-trigger" data-target="addToCollection">Add to Collection</a>
                              <a href="#" class="button is-success is-medium">Add to Favourites</a>
                 </div>
@@ -40,7 +41,7 @@
 	</div>
 </section>
 
-<form action="/books/{{book.id}}/add" method="POST">
+ <form action="/books/{{book.id}}/add" method="POST">
     <div class="modal" id="addToCollection">
         <div class="modal-background"></div>
         <div class="modal-content">
@@ -48,9 +49,8 @@
             <div class="modal-card">
                 <header class="modal-card-head">
                     <p class="modal-card-title">Add to Collection</p>
-                    <button class="delete update-modal-close" aria-label="close"></button>
+                    <span class="delete update-modal-close" aria-label="close"></span>
                 </header>
-
                 <section class="modal-card-body">
                     <div class="field">
                         <label class="label">Collection Name</label>
@@ -60,11 +60,10 @@
                         <label class="label">Description</label>
                         <textarea class="textarea has-fixed-size" name="description"></textarea>
                     </div>
-     
                 </section>
                 <footer class="modal-card-foot">
                     <button id="save" class="button is-success" type="submit">Save changes</button>
-                    <button class="button update-modal-close">Cancel</button>
+                    <span class="button update-modal-close">Cancel</span>
                 </footer>
             </div>
         </div>

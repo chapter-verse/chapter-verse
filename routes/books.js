@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 const Collection = require('../models/Collection.model');
+const User = require('../models/User.model');
 
 router
 	.route('/')
@@ -47,13 +48,17 @@ router
 		});
 		const { name, description } = req.body;
 		const book = response.data.id;
+		const currentUser = req.session.currentUser.username;
+		const user = await User.findOne({ currentUser });
 		const collection = await Collection.create({
 			name,
 			description,
 			user: req.session.currentUser,
 		});
+		user.collections.push(collection);
 		collection.books.push(book);
 		await collection.save();
+		await user.save();
 	});
 
 module.exports = router;

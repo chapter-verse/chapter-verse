@@ -3,34 +3,27 @@ const User = require('../models/User.model');
 const Collection = require('../models/Collection.model');
 const session = require('express-session');
 const bcrypt = require('bcrypt');
+const axios = require('axios');
 
-router.get('/create', (req, res, next) => {
-    console.log(req.session)
-    const {username} = req.session.currentUser;
-    console.log(username)
-    User.findOne({username})
-	.then((data) => {res.render('create-collection', data)
-})
-	.catch((err) => {
-		console.log(err)
-		next(err)
+router
+	.route('/create')
+	.get((req, res) => {})
+	.post(async (req, res) => {
+		try {
+			const { name, description } = req.body;
+			const currentUser = req.session.currentUser.username;
+			const user = await User.findOne({ currentUser });
+			const collection = await Collection.create({
+				name,
+				description,
+				user: req.session.currentUser,
+			});
+			user.collections.push(collection);
+			await collection.save();
+			await user.save();
+		} catch (err) {
+			console.log(err);
+		}
 	});
-});
-
-router.post('/create', (req, res, next) => {
-	const {userId} = req.session.currentUser;
-	const {name, description} = req.body;
-  
-	Collection.create({name, description, userId})
-	  .then(() => {
-		res.redirect(`/profile/${username}`); 
-	  })
-	  .catch((err) => {
-		console.log(err)
-		next(err)
-	});
-  });
-
-
 
 module.exports = router;

@@ -30,10 +30,10 @@
 		</form>
 	</div>
 	{{#if books}}
+
 		<section class='container'>
 			<div class='columns features is-flex is-flex-wrap-wrap'>
 				{{#each books}}
-					{{!-- {{#if volumeInfo.imageLinks.thumbnail}} --}}
 					<div class='column is-3 modal-button' data-target='modal-card'>
 						<div class='card is-shady'>
 							<div class='card-image'>
@@ -49,12 +49,12 @@
 									<p
 										style='height: 1.5rem;white-space: nowrap;overflow: hidden;text-overflow: ellipsis'
 									>{{volumeInfo.authors}}</p>
-									<a href='https://www.googleapis.com/books/v1/volumes/{{id}}' class='button is-warning modal-button'>Details</a>
+									<a href='/books/{{id}}' class='button is-warning modal-button'>Details</a>
 								</div>
 							</div>
 						</div>
 					</div>
-					{{!-- {{/if}} --}}
+
 				{{/each}}
 			</div>
 		</section>

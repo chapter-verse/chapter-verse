@@ -15,7 +15,6 @@ router
 				},
 			);
 			const books = response.data.items;
-			console.log(books);
 			res.render('index', { books });
 		} else {
 			res.render('index');

@@ -26,6 +26,8 @@ app.use('/profile', require('./routes/profile'));
 
 app.use('/logout', require('./routes/logout'));
 
+app.use('/books', require('./routes/books'));
+
 require('./error-handling')(app);
 
 module.exports = app;

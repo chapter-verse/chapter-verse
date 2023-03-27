@@ -43,7 +43,11 @@ a {
 }
 
 .white {
-	color: white;
+	color: white !important;
+}
+
+.gray {
+	color: rgb(226, 226, 226) !important;
 }
 
 .navbar {
@@ -83,4 +87,9 @@ a {
 	margin-bottom: 20px;
 	padding: 20px;
 	background-color: #f1f1f1;
+}
+
+.is-rounded {
+	border-radius: 2rem;
+	box-shadow: 0px 0px 5px black;
 }

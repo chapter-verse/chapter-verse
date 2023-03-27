@@ -10,3 +10,10 @@ router.get('/:username', (req, res) => {
 });
 
 module.exports = router;
+
+router.get('/:username/preferences', (req, res) => {
+	const { username } = req.params;
+	User.findOne({ username })
+		.then((data) => res.render('preferences', data))
+		.catch((err) => console.log(err));
+});

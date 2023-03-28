@@ -113,7 +113,7 @@
 							</div>
 						</div>
 						<footer class='card-footer'>
-							<a class='card-footer-item'>Compare</a>
+							<a class='card-footer-item' href="/collections/{{this._id}}">Details</a>
 							<a class='card-footer-item'>Share</a>
 							<a class='card-footer-item'>Delete</a>
 						</footer>
@@ -175,23 +175,7 @@
 					<span>
 						<span class='select'>
 							<input type='date' class='input' name='birthday' value='{{birthday}}' />
-							{{! <select>
-							<option>Day</option>
-							<option>With options</option>
-						</select> }}
 						</span>
-						{{! <span class='select'>
-						<select>
-							<option>Month</option>
-							<option>With options</option>
-						</select>
-					</span>
-					<span class='select'>
-						<select>
-							<option>Year</option>
-							<option>With options</option>
-						</select>
-					</span> }}
 					</span>
 				</div>
 				<label class='label'>Description</label>
@@ -201,7 +185,7 @@
 			</section>
 			<footer class='modal-card-foot'>
 				<button class='button is-primary modal-save'>Save changes</button>
-				<a class='button modal-cancel' href='/profile/{{username}}'>Cancel</a>
+				<span class='button update-modal-close'>Cancel</span>
 			</footer>
 
 		</div>

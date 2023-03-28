@@ -27,4 +27,41 @@ router
 		}
 	});
 
+router.get('/:collectionsId', (req, res) => {
+    const { collectionsId } = req.params;
+    Collection.findById(collectionsId)
+        .populate('books')
+        .then((data) => res.render('collection', data))
+        .catch((err) => console.log(err));
+});
+
+
+router.post('/:collectionsId/edit', (req, res, next) => {
+    const { collectionsId } = req.params;
+    const { name, description } = req.body;
+
+    User.findByIdAndUpdate(collectionsId, { name, description },)
+        .then(() => {
+            res.redirect(`/collections/${collectionsId}`);
+        })
+        .catch((err) => {
+            console.log(err);
+            next(err);
+        });
+});
+
+router.get('/:collectionsId/delete', (req, res, next) => {
+    const { collectionsId } = req.params;
+    const { name, description } = req.body;
+
+    User.findByIdAndDelete(collectionsId, { name, description },)
+        .then(() => {
+            res.redirect(`/collections/${collectionsId}`);
+        })
+        .catch((err) => {
+            console.log(err);
+            next(err);
+        });
+});
+
 module.exports = router;

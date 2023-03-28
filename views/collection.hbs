@@ -1,0 +1,117 @@
+<div class='columns'>
+	<div class='container profile'>
+		<div class='section profile-heading'>
+			<div class='columns is-mobile is-multiline'>
+				<div class='column is-2'>
+					<span class='header-icon user-profile-image'>
+						<img
+							alt=''
+							src='https://media.istockphoto.com/id/1332100919/de/vektor/m%C3%A4nner-ikone-schwarzes-symbol-personensymbol.jpg?s=612x612&w=0&k=20&c=B18829X05YkUnhCWemZmNjOPekogsD7zQX23ATFS6dQ='
+						/>
+						<div class='buttons is-flex is-justify-content-center'>
+							<a
+								class='button is-primary mt-4 px-6 is-medium js-modal-trigger'
+                                data-target="editCollection"
+							>
+								Edit collection
+							</a>
+						</div>
+					</span>
+				</div>
+
+				<div class='column is-4-tablet is-10-mobile name is-flex is-align-items-center is-flex-direction-column'>
+					<span class='white subtitle is-1 my-auto'>{{name}}</span>
+				</div>
+				<div class='column is-2-tablet is-4-mobile has-text-centered'>
+					{{!-- <p class='stat-val'>{{collections.length}}</p>
+					<p class='stat-key'>Collections</p> --}}
+				</div>
+				<div class='column is-2-tablet is-4-mobile has-text-centered'>
+					<p class='stat-val'>{{books.length}}</p>
+					<p class='stat-key'>Books</p>
+				</div>
+				<div class='column is-2-tablet is-4-mobile has-text-centered'>
+					<p class='stat-val'>3</p>
+					<p class='stat-key'>Reviews</p>
+				</div>
+			</div>
+		</div>
+		{{!-- <div class='box' style='border-radius: 0px;'>
+			<div class='columns'>
+
+				<div class='column is-flex is-justify-content-center'>
+					<div class='field has-addons'>
+						<div class='control'>
+							<p class='control has-icons-left has-icons-right'>
+								<input class='input is-medium' placeholder='Search your Collections' type='text' />
+								<span class='icon is-small is-left'>
+									<i class='fas fa-search'></i>
+								</span>
+							</p>
+						</div>
+						<div class='control'>
+							<button class='button is-info is-medium mr-3'>Search</button>
+						</div>
+					</div>
+
+					<a class='button is-success is-medium js-modal-trigger' data-target='addToCollection'>Create a Collection</a>
+
+				</div>
+			</div>
+		</div> --}}
+		<div class='columns is-mobile is-flex is-flex-wrap-wrap'>
+			{{#each books}}
+				<div class='column is-3 modal-button' data-target='modal-card'>
+						<div class='card is-shady'>
+							<div class='card-image'>
+								<figure class='image is-4by5'>
+									<img src='{{volumeInfo.imageLinks.thumbnail}}' alt='{{volumeInfo.title}}' />
+								</figure>
+							</div>
+							<div class='card-content'>
+								<div class='content'>
+									<h4
+										style='height: 1.5rem;white-space: nowrap;overflow: hidden;text-overflow: ellipsis '
+									>{{volumeInfo.title}}</h4>
+									<p
+										style='height: 1.5rem;white-space: nowrap;overflow: hidden;text-overflow: ellipsis'
+									>{{volumeInfo.authors}}</p>
+									<a href='/books/{{id}}' class='button is-warning modal-button'>Details</a>
+								</div>
+							</div>
+						</div>
+					</div>
+			{{/each}}
+		</div>
+
+	</div>
+</div>
+
+<form action='/collections/{{collections._id}}/edit' method='POST'>
+	<div class='modal' id='editCollection'>
+		<div class='modal-background'></div>
+		<div class='modal-content'>
+			<div class='modal-background'></div>
+			<div class='modal-card'>
+				<header class='modal-card-head'>
+					<p class='modal-card-title'>Edit Collection</p>
+					<span class='delete update-modal-close' aria-label='close'></span>
+				</header>
+				<section class='modal-card-body'>
+					<div class='field'>
+						<label class='label'>Collection Name</label>
+						<input type='text' id='update-text' name='name' class='input' value='{{name}}' />
+					</div>
+					<div class='field'>
+						<label class='label'>Description</label>
+						<textarea class='textarea has-fixed-size' name='description' value='{{description}}' ></textarea>
+					</div>
+				</section>
+				<footer class='modal-card-foot'>
+					<button id='save' class='button is-success' type='submit'>Save changes</button>
+					<span class='button update-modal-close'>Cancel</span>
+				</footer>
+			</div>
+		</div>
+	</div>
+</form>

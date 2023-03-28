@@ -1,0 +1,260 @@
+<div class='columns'>
+	<div class='container profile'>
+		<div class='section profile-heading'>
+			<div class='columns is-mobile is-multiline'>
+				<div class='column is-2'>
+					<span class='header-icon user-profile-image'>
+						<img
+							alt=''
+							src='https://media.istockphoto.com/id/1332100919/de/vektor/m%C3%A4nner-ikone-schwarzes-symbol-personensymbol.jpg?s=612x612&w=0&k=20&c=B18829X05YkUnhCWemZmNjOPekogsD7zQX23ATFS6dQ='
+						/>
+					</span>
+				</div>
+
+				<div class='column is-4-tablet is-10-mobile name'>
+					<p>
+						<span class='white title is-bold'>{{session.currentUser.username}}</span>
+						
+						<br />
+					</p>
+					<p class='tagline'>
+						{{data.description}}
+					</p>
+					<br />
+						<a
+							class='button is-primary mt-4 px-6 is-small js-modal-trigger'
+							data-target='profileModal'
+							id='edit-preferences'
+							style='margin: 5px 0'
+						>
+							Edit Profil
+						</a>
+						<a
+							class='button is-primary mt-4 px-6 is-small js-modal-trigger'
+							data-target=''
+							id='edit-preferences'
+							style='margin: 5px 0'
+						>
+							Edit Picture
+						</a>
+				</div>
+				<div class='column is-2-tablet is-4-mobile has-text-centered'>
+					<p class='stat-val'>{{data.collections.length}}</p>
+					<p class='stat-key'>Collections</p>
+				</div>
+				<div class='column is-2-tablet is-4-mobile has-text-centered'>
+					<p class='stat-val'>{{booksNb}}</p>
+					<p class='stat-key'>Books</p>
+				</div>
+				<div class='column is-2-tablet is-4-mobile has-text-centered'>
+					<p class='stat-val'>0</p>
+					<p class='stat-key'>Reviews</p>
+				</div>
+			</div>
+		</div>
+		<div class='profile-options is-fullwidth'>
+			<div class='tabs is-fullwidth is-medium'>
+				<ul>
+					<li class='link is-active'>
+						<a>
+							<span class='icon'>
+								<i class='fa fa-list'></i>
+							</span>
+							<span>My Collections</span>
+						</a>
+					</li>
+					<li class='link'>
+						<a>
+							<span class='icon'>
+								<i class='fa fa-book'></i>
+							</span>
+							<span>My Books</span>
+						</a>
+					</li>
+					<li class='link'>
+						<a>
+							<span class='icon'>
+								<i class='fa fa-comment'></i>
+							</span>
+							<span>My Reviews</span>
+						</a>
+					</li>
+
+				</ul>
+			</div>
+		</div>
+		<div class='box' style='border-radius: 0px;'>
+			<div class='columns'>
+
+				<div class='column is-flex is-justify-content-center'>
+					<div class='field has-addons'>
+						<div class='control'>
+							<p class='control has-icons-left has-icons-right'>
+								<input class='input is-medium' placeholder='Search your Collections' type='text' />
+								<span class='icon is-small is-left'>
+									<i class='fas fa-search'></i>
+								</span>
+							</p>
+						</div>
+						<div class='control'>
+							<button class='button is-info is-medium mr-3'>Search</button>
+						</div>
+					</div>
+
+					<a class='button is-success is-medium js-modal-trigger' data-target='addToCollection'>Create a Collection</a>
+
+				</div>
+			</div>
+		</div>
+		<div class='columns is-mobile is-flex is-flex-wrap-wrap'>
+			{{#each data.collections}}
+				<div class='column is-3-tablet is-6-mobile mx-auto'>
+					<div class='card'>
+						<div class='card-image'>
+							<figure class='image is-4by3'>
+								<img
+									alt=''
+									src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFUP-U9gUQt9OpY50pMStfMMbZj0l3JMCnNQ&usqp=CAU'
+								/>
+							</figure>
+						</div>
+						<div class='card-content'>
+							<div class='content'>
+								<span class='tag is-dark subtitle'>Books: {{books.length}}</span>
+								<p class='title is-4'>{{name}}</p>
+								<p>{{description}}</p>
+							</div>
+						</div>
+						<footer class='card-footer'>
+							<a class='card-footer-item js-modal-trigger'	data-target='editCollection'>Edit</a>
+							<a class='card-footer-item' href="/collections/{{this._id}}">Details</a>
+							<a class='card-footer-item js-modal-trigger' data-target='deleteCollection'>Delete</a>
+						</footer>
+					</div>
+				</div>
+				<form action='/collections/{{this._id}}/edit' method='POST'>
+					<div class='modal' id='editCollection'>
+						<div class='modal-background'></div>
+						<div class='modal-content'>
+							<div class='modal-background'></div>
+							<div class='modal-card'>
+								<header class='modal-card-head'>
+									<p class='modal-card-title'>Edit Collection</p>
+									<span class='delete update-modal-close' aria-label='close'></span>
+								</header>
+								<section class='modal-card-body'>
+									<div class='field'>
+										<label class='label'>Collection Name</label>
+										<input type='text' id='update-text' name='name' class='input' value='{{this.name}}' />
+									</div>
+									<div class='field'>
+										<label class='label'>Description</label>
+										<textarea class='textarea has-fixed-size' name='description'>{{this.description}}</textarea>
+									</div>
+								</section>
+								<footer class='modal-card-foot'>
+									<button id='save' class='button is-success' type='submit'>Save changes</button>
+									<span class='button update-modal-close'>Cancel</span>
+								</footer>
+							</div>
+						</div>
+					</div>
+				</form>
+				<form action='/collections/{{this._id}}/delete' method='GET'>
+					<div class='modal' id='deleteCollection'>
+						<div class='modal-background'></div>
+						<div class='modal-content'>
+							<div class='modal-background'></div>
+							<div class='modal-card'>
+								<header class='modal-card-head'>
+									<p class='modal-card-title'>Delete Collection</p>
+									<span class='delete update-modal-close' aria-label='close'></span>
+								</header>
+								<section class='modal-card-body'>
+									<div class='field'>
+										<label class='label'>
+										Are you sure you want to delete this collection : {{this.name}}
+										</label>
+									</div>
+								</section>
+								<footer class='modal-card-foot'>
+									<button id='save' class='button is-success' type='submit'>Delete</button>
+									<span class='button update-modal-close'>Cancel</span>
+								</footer>
+							</div>
+						</div>
+					</div>
+				</form>
+			{{/each}}
+		</div>
+
+	</div>
+</div>
+
+<form action='/collections/create' method='POST'>
+	<div class='modal' id='addToCollection'>
+		<div class='modal-background'></div>
+		<div class='modal-content'>
+			<div class='modal-background'></div>
+			<div class='modal-card'>
+				<header class='modal-card-head'>
+					<p class='modal-card-title'>Create Collection</p>
+					<span class='delete update-modal-close' aria-label='close'></span>
+				</header>
+				<section class='modal-card-body'>
+					<div class='field'>
+						<label class='label'>Collection Name</label>
+						<input type='text' id='update-text' name='name' class='input' />
+					</div>
+					<div class='field'>
+						<label class='label'>Description</label>
+						<textarea class='textarea has-fixed-size' name='description'></textarea>
+					</div>
+				</section>
+				<footer class='modal-card-foot'>
+					<button id='save' class='button is-success' type='submit'>Create</button>
+					<span class='button update-modal-close'>Cancel</span>
+				</footer>
+			</div>
+		</div>
+	</div>
+</form>
+
+<form action='/profile/{{session.currentUser._id}}/edit' method='post'>
+	<div class='modal' id='profileModal'>
+		<div class='modal-background'></div>
+		<div class='modal-card'>
+
+			<header class='modal-card-head'>
+				<p class='modal-card-title'>Edit Profil</p>
+
+			</header>
+			<section class='modal-card-body'>
+				<label class='label'>Username</label>
+				<p class='control has-icon has-icon-right'>
+					<input class='input' placeholder='Username' type='text' name='username' value='{{username}}' />
+				</p>
+				<div class='control'>
+					<div class='control-label is-pulled-left'>
+						<label class='label'>Date of Birth</label>
+					</div>
+					<span>
+						<span class='select'>
+							<input type='date' class='input' name='birthday' value='{{birthday}}' />
+						</span>
+					</span>
+				</div>
+				<label class='label'>Description</label>
+				<p class='control'>
+					<textarea class='textarea' placeholder='Describe Yourself!' name='description'>{{description}}</textarea>
+				</p>
+			</section>
+			<footer class='modal-card-foot'>
+				<button class='button is-primary modal-save'>Save changes</button>
+				<span class='button update-modal-close'>Cancel</span>
+			</footer>
+
+		</div>
+	</div>
+</form>
+

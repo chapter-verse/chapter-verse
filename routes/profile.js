@@ -4,13 +4,38 @@ const bcrypt = require('bcrypt');
 
 router.get('/:username', (req, res) => {
 	const { username } = req.params;
-	User.findOne({ username })
-	.populate('collections')
-	.then((data) => {
-		const {birthday} = data
-		console.log(birthday)
-		res.render('profile', data)})
-		.catch((err) => console.log(err));
+	const currentUser = req.session.currentUser.username
+	if(username === currentUser){
+		User.findOne({ username })
+		.populate('collections')
+		.then((data) => {
+			let booksNb = 0
+			console.log(data)
+			let {collections} = data
+			collections.forEach(element => {
+				console.log(element)
+				let {books} = element
+				booksNb += books.length
+			});
+			console.log(booksNb)
+			res.render('user-profile', {data, booksNb} , )})
+			.catch((err) => console.log(err));
+	} else {
+		User.findOne({ username })
+		.populate('collections')
+		.then((data) => {
+			let booksNb = 0
+			console.log(data)
+			let {collections} = data
+			collections.forEach(element => {
+				console.log(element)
+				let {books} = element
+				booksNb += books.length
+			});
+			console.log(booksNb)
+			res.render('profile', {data, booksNb} , )})
+			.catch((err) => console.log(err));
+	}
 });
 
 module.exports = router;

@@ -53,7 +53,7 @@ router
 		console.log(name);
 		const currentUser = req.session.currentUser.username;
 		const user = await User.findOne({ currentUser }).populate('collections');
-		const collectionTarget = user.collections.find((collection) => collection.name === name);
+		const collectionTarget = user.collections[name];
 		console.log(collectionTarget);
 		// await user.save();
 		// res.redirect(`/books/${book}`);

@@ -40,7 +40,7 @@ router.post('/:collectionsId/edit', (req, res, next) => {
     const { collectionsId } = req.params;
     const { name, description } = req.body;
 
-    User.findByIdAndUpdate(collectionsId, { name, description },)
+    Collection.findByIdAndUpdate(collectionsId, { name, description }, { new: true })
         .then(() => {
             res.redirect(`/collections/${collectionsId}`);
         })
@@ -52,11 +52,10 @@ router.post('/:collectionsId/edit', (req, res, next) => {
 
 router.get('/:collectionsId/delete', (req, res, next) => {
     const { collectionsId } = req.params;
-    const { name, description } = req.body;
-
-    User.findByIdAndDelete(collectionsId, { name, description },)
+    const currentUser = req.session.currentUser.username;
+    Collection.findByIdAndDelete(collectionsId)
         .then(() => {
-            res.redirect(`/collections/${collectionsId}`);
+            res.redirect(`/profile/${currentUser}`);
         })
         .catch((err) => {
             console.log(err);

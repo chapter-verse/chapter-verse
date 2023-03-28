@@ -26,9 +26,6 @@ router.get('/:userId/edit', (req, res, next) => {
 });
 
 router.post('/:userId/edit', (req, res, next) => {
-	console.log(req.params);
-	console.log(req.body);
-	console.log(req.session);
 	const { userId } = req.params;
 	const { username, description, birthday } = req.body;
 

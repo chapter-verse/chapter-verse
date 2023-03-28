@@ -43,20 +43,21 @@ router
 	.route('/:bookId/add')
 	.get((req, res) => {})
 	.post(async (req, res) => {
+		const { name } = req.body;
+		const currentUser = req.session.currentUser.username;
 		const response = await axios.get(`https://www.googleapis.com/books/v1/volumes/${req.params.bookId}`, {
 			headers: {
 				'Referrer-Policy': 'no-referrer-when-downgrade',
 			},
 		});
-		const book = response.data.id;
-		const { name } = req.body;
-		console.log(name);
-		const currentUser = req.session.currentUser.username;
+		const book = response.data;
+		const bookId = book.id;
 		const user = await User.findOne({ currentUser }).populate('collections');
-		const collectionTarget = user.collections[name];
-		console.log(collectionTarget);
-		// await user.save();
-		// res.redirect(`/books/${book}`);
+		const collection = user.collections.find((collection) => collection.name === name);
+		collection.books.push(bookId);
+		await collection.save();
+		await user.save();
+		res.redirect(`/books/${bookId}`);
 	});
 
 module.exports = router;

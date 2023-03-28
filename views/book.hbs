@@ -1,21 +1,53 @@
+<section class="hero">
+	<div class="hero-body">
+		<div class="columns">
+			<div class="column is-10 is-offset-1">
+				<div class="columns featured-post is-multiline">
+				<div class="column is-12 post">
+					<article class="columns featured">
+					<div class="column is-one-third is-full-mobile post-img ">
+						<img src='{{book.volumeInfo.imageLinks.large}}' alt='' >
+					</div>
+					<div class="column is-two-third is-full-mobile featured-content va">
+						<div>
+						<h2 class="heading post-category">{{book.volumeInfo.authors}}</h2>
+						<h1 class="title post-title">{{book.volumeInfo.title}}</h1>
+						<h3 class="heading post-category">{{book.volumeInfo.subtitle}}</h3>
+						<h4 class="heading post-category">{{book.volumeInfo.categories}}</h4>
+						<hr>
+						<p class="post-excerpt">{{{book.volumeInfo.description}}}</p>
+						<br>
+                  <a class="button is-info js-modal-trigger" data-target="addToCollection">Add to Collection</a>
+                  <a class="button is-success">Add to Favourites</a>
+						</div>
+					</div>
+					</article>
+                  <a class="button is-danger " href="javascript:history.back()" class="button">Go Back</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+{{!-- 
 <section class='hero' >
    <div class='hero-body' >
-      <div class='container ' >
-         <div class='columns is-flex is-justify-content-center '>
-            <div class='column is-4 '>
-               <figure class='image is-4by5'>
-                  <img src='{{book.volumeInfo.imageLinks.large}}' alt='' />
-               </figure>
+      <div class='container columns' >
+         <section class="column is-5-tablet is-10-mobile">
+            <div class='columns is-flex is-justify-content-center '>
+               <div class='column is-4 '>
+                  <figure class='image is-4by5'>
+                     <img src='{{book.volumeInfo.imageLinks.large}}' alt='' />
+                  </figure>
+               </div>
             </div>
-         </div>
-         <div class='content is-medium is-flex is-justify-content-center '>
-            <div class="buttons">
-               <a href="{{book.imageLinks.previewLink}}" class="button is-warning is-medium">Preview</a>
-               <a class="button is-info is-medium js-modal-trigger" data-target="addToCollection">Add to Collection</a>
-               <a class="button is-success is-medium">Add to Favourites</a>
+            <div class='content is-medium is-flex is-justify-content-center '>
+               <div class="buttons is-flex is-justify-content-center ">
+                  <a class="button is-info is-medium js-modal-trigger" data-target="addToCollection">Add to Collection</a>
+                  <a class="button is-success is-medium">Add to Favourites</a>
+               </div>
             </div>
-         </div>
-         <section class='section' >
+         </section>
+         <section class='section column is-7-tablet is-10-mobile' >
             <div class='columns is-flex is-justify-content-center p-6 is-rounded' style="background: white;" >
                <div class='column is-8 ' >
                   <div class='content is-medium'>
@@ -32,18 +64,13 @@
                   </div>
                </div>
             </div>
-            <div class="buttons is-flex is-justify-content-center">
-               <a href="{{book.imageLinks.previewLink}}" class="button is-warning is-medium">Preview</a>
-               <a href="#" class="button is-info is-medium js-modal-trigger" data-target="addToCollection">Add to Collection</a>
-               <a href="#" class="button is-success is-medium">Add to Favourites</a>
-            </div>
             <div class="buttons  is-flex is-justify-content-center ">
                <a class="button is-danger is-medium" href="javascript:history.back()" class="button">Go Back</a>
             </div>
          </section>
       </div>
    </div>
-</section>
+</section> --}}
 
 <form action="/books/{{book.id}}/add" method="POST">
    <div class="modal" id="addToCollection">

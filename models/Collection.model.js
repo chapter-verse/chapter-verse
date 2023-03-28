@@ -12,7 +12,7 @@ const collectionSchema = new Schema(
 		},
 		books: {
 			type: [String],
-			required: false,
+			default: [],
 		},
 		user: {
 			type: Schema.Types.ObjectId,

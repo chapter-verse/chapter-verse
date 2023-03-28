@@ -11,6 +11,7 @@ router
 	.post(async (req, res) => {
 		try {
 			const { name, description } = req.body;
+			console.log(req.body);
 			const currentUser = req.session.currentUser.username;
 			const user = await User.findOne({ currentUser });
 			const collection = await Collection.create({
@@ -19,8 +20,8 @@ router
 				user: req.session.currentUser,
 			});
 			user.collections.push(collection);
-			await collection.save();
 			await user.save();
+			await collection.save();
 			res.redirect(`/profile/${currentUser}`);
 		} catch (err) {
 			console.log(err);
@@ -30,9 +31,18 @@ router
 router.get('/:collectionsId', (req, res) => {
 	const { collectionsId } = req.params;
 	Collection.findById(collectionsId)
-		.populate('_id books')
-		.then((data) => res.render('collection', data))
-		.catch((err) => console.log(err));
+		.populate('books')
+		.then((data) => {
+			if (data) {
+				res.render('collection', data);
+			} else {
+				throw new Error('No data found');
+			}
+		})
+		.catch((err) => {
+			console.log(err);
+			res.status(500).send('An error occurred');
+		});
 });
 
 router.post('/:collectionsId/edit', (req, res, next) => {

@@ -20,9 +20,7 @@ router
 			const userData = await User.findOne({ currentUser }).populate('collections');
 			const books = response.data.items;
 			res.render('books-list', { books, userData });
-			res.render('books-list', { books });
 		} else {
-			res.render('books-list');
 			res.render('books-list');
 		}
 	})

@@ -32,17 +32,8 @@ router.get('/:collectionsId', (req, res) => {
 	const { collectionsId } = req.params;
 	Collection.findById(collectionsId)
 		.populate('books')
-		.then((data) => {
-			if (data) {
-				res.render('collection', data);
-			} else {
-				throw new Error('No data found');
-			}
-		})
-		.catch((err) => {
-			console.log(err);
-			res.status(500).send('An error occurred');
-		});
+		.then((data) => res.render('collection', data))
+		.catch((err) => console.log(err));
 });
 
 router.post('/:collectionsId/edit', (req, res, next) => {

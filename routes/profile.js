@@ -5,8 +5,11 @@ const bcrypt = require('bcrypt');
 router.get('/:username', (req, res) => {
 	const { username } = req.params;
 	User.findOne({ username })
-		.populate('collections')
-		.then((data) => res.render('profile', data))
+	.populate('collections')
+	.then((data) => {
+		const {birthday} = data
+		console.log(birthday)
+		res.render('profile', data)})
 		.catch((err) => console.log(err));
 });
 

@@ -44,7 +44,7 @@
       </div>
    </div>
 </section>
-	
+
 <form action="/books/{{book.id}}/add" method="POST">
    <div class="modal" id="addToCollection">
       <div class="modal-background"></div>
@@ -58,9 +58,11 @@
             <section class="modal-card-body" style="min-height: 30vh;">
                <div class="field">
                   <div class="select">
-                     <select>
+                     <select name="name">
                         <option hidden> Your Collections</option>
-                        <option>With options</option>
+                        {{#each userData.collections}}
+                          <option value="{{name}}">{{name}}</option>
+                        {{/each}}
                      </select>
                   </div>
                </div>

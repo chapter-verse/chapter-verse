@@ -32,8 +32,10 @@ router
 				'Referrer-Policy': 'no-referrer-when-downgrade',
 			},
 		});
+		const currentUser = req.session.currentUser.username;
+		const userData = await User.findOne({ currentUser }).populate('collections');
 		const book = response.data;
-		res.render('book', { book });
+		res.render('book', { book, userData });
 	})
 	.post((req, res) => {});
 
@@ -46,19 +48,15 @@ router
 				'Referrer-Policy': 'no-referrer-when-downgrade',
 			},
 		});
-		const { name, description } = req.body;
 		const book = response.data.id;
+		const { name } = req.body;
+		console.log(name);
 		const currentUser = req.session.currentUser.username;
-		const user = await User.findOne({ currentUser });
-		const collection = await Collection.create({
-			name,
-			description,
-			user: req.session.currentUser,
-		});
-		user.collections.push(collection);
-		collection.books.push(book);
-		await collection.save();
-		await user.save();
+		const user = await User.findOne({ currentUser }).populate('collections');
+		const collectionTarget = user.collections.find((collection) => collection.name === name);
+		console.log(collectionTarget);
+		// await user.save();
+		// res.redirect(`/books/${book}`);
 	});
 
 module.exports = router;

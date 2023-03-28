@@ -21,6 +21,7 @@ router
 			user.collections.push(collection);
 			await collection.save();
 			await user.save();
+			res.redirect(`/profile/${currentUser}`);
 		} catch (err) {
 			console.log(err);
 		}

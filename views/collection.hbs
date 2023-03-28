@@ -36,7 +36,7 @@
                     </a>
                     <a
                         class='button is-primary mt-4 px-6 is-small js-modal-trigger'
-                        href="/collections/{{this._id}}/delete"
+                        data-target='deleteCollection'
                         id='edit-preferences'
                         style='margin: 5px 0'
                     >
@@ -107,6 +107,31 @@
 				</section>
 				<footer class='modal-card-foot'>
 					<button id='save' class='button is-success' type='submit'>Save changes</button>
+					<span class='button update-modal-close'>Cancel</span>
+				</footer>
+			</div>
+		</div>
+	</div>
+</form>
+<form action='/collections/{{this._id}}/delete' method='GET'>
+	<div class='modal' id='deleteCollection'>
+		<div class='modal-background'></div>
+		<div class='modal-content'>
+			<div class='modal-background'></div>
+			<div class='modal-card'>
+				<header class='modal-card-head'>
+					<p class='modal-card-title'>Delete Collection</p>
+					<span class='delete update-modal-close' aria-label='close'></span>
+				</header>
+				<section class='modal-card-body'>
+					<div class='field'>
+                        <label class='label'>
+						Are you sure you want to delete this collection : {{name}}
+                        </label>
+					</div>
+				</section>
+				<footer class='modal-card-foot'>
+					<button id='save' class='button is-success' type='submit'>Delete</button>
 					<span class='button update-modal-close'>Cancel</span>
 				</footer>
 			</div>

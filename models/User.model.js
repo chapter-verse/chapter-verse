@@ -25,7 +25,7 @@ const userSchema = new Schema(
 			minlength: [3, 'Password must have at least 3 characters.'],
 		},
 		birthday: {
-			type: Date,
+			type: String,
 			required: false,
 		},
 		description: {

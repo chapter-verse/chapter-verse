@@ -157,6 +157,7 @@
 
 <form action='/profile/{{session.currentUser._id}}/edit' method='post'>
 	<div class='modal' id='profileModal'>
+		<div class='modal-background'></div>
 		<div class='modal-card'>
 
 			<header class='modal-card-head'>
@@ -180,7 +181,7 @@
 				</div>
 				<label class='label'>Description</label>
 				<p class='control'>
-					<textarea class='textarea' placeholder='Describe Yourself!' name='description' value='{{description}}'></textarea>
+					<textarea class='textarea' placeholder='Describe Yourself!' name='description'>{{description}}</textarea>
 				</p>
 			</section>
 			<footer class='modal-card-foot'>

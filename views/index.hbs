@@ -6,9 +6,6 @@
 				<div class='my-6'>
 
 					<h1 class='subtitle is-1 my-6 white'>Welcome, {{session.currentUser.username}}</h1>
-					<div class='buttons is-flex is-justify-content-center'>
-						<a class='button is-success is-medium js-modal-trigger' data-target='addToCollection'>Create a Collection</a>
-					</div>
 
 				</div>
 			</div>
@@ -62,32 +59,3 @@
 		</section>
 	{{/if}}
 </div>
-
-<form action='/collections/create' method='POST'>
-	<div class='modal' id='addToCollection'>
-		<div class='modal-background'></div>
-		<div class='modal-content'>
-			<div class='modal-background'></div>
-			<div class='modal-card'>
-				<header class='modal-card-head'>
-					<p class='modal-card-title'>Add to Collection</p>
-					<span class='delete update-modal-close' aria-label='close'></span>
-				</header>
-				<section class='modal-card-body'>
-					<div class='field'>
-						<label class='label'>Collection Name</label>
-						<input type='text' id='update-text' name='name' class='input' value='' />
-					</div>
-					<div class='field'>
-						<label class='label'>Description</label>
-						<textarea class='textarea has-fixed-size' name='description'></textarea>
-					</div>
-				</section>
-				<footer class='modal-card-foot'>
-					<button id='save' class='button is-success' type='submit'>Save changes</button>
-					<span class='button update-modal-close'>Cancel</span>
-				</footer>
-			</div>
-		</div>
-	</div>
-</form>

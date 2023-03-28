@@ -38,8 +38,9 @@ const userSchema = new Schema(
 				ref: 'Collection',
 			},
 		],
-		avatar: {
-			type: String
+		imageUrl: {
+			type: String,
+			default: 'https://res.cloudinary.com/dsbfbwbvq/image/upload/v1680046992/Chapter-Verse/fhjzz9kcyyyzh6uio6qk.png'
 		}
 	},
 	{

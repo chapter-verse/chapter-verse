@@ -4,6 +4,7 @@ const Collection = require('../models/Collection.model');
 const session = require('express-session');
 const bcrypt = require('bcrypt');
 const axios = require('axios');
+const fileUploader = require('../config/cloudinary.config');
 
 router
 	.route('/create')
@@ -41,6 +42,18 @@ router.post('/:collectionsId/edit', (req, res, next) => {
 	const { name, description } = req.body;
 
 	Collection.findByIdAndUpdate(collectionsId, { name, description }, { new: true })
+		.then(() => {
+			res.redirect(`/collections/${collectionsId}`);
+		})
+		.catch((err) => {
+			console.log(err);
+			next(err);
+		});
+});
+
+router.post('/:collectionsId/edit-cover',fileUploader.single('cover'), (req, res, next) => {
+	const { collectionsId } = req.params;
+	User.findByIdAndUpdate(collectionsId, {imageUrl: req.file.path}, { new: true })
 		.then(() => {
 			res.redirect(`/collections/${collectionsId}`);
 		})

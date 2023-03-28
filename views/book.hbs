@@ -5,8 +5,8 @@
 				<div class="columns featured-post is-multiline">
 				<div class="column is-12 post">
 					<article class="columns featured">
-					<div class="column is-one-third is-full-mobile post-img ">
-						<img src='{{book.volumeInfo.imageLinks.large}}' alt='' >
+					<div class="column is-one-third is-full-mobile post-img is-shady ">
+						<img class="is-shady" src='{{book.volumeInfo.imageLinks.large}}' alt='' >
 					</div>
 					<div class="column is-two-third is-full-mobile featured-content va">
 						<div>
@@ -17,12 +17,12 @@
 						<hr>
 						<p class="post-excerpt">{{{book.volumeInfo.description}}}</p>
 						<br>
-                  <a class="button is-info js-modal-trigger" data-target="addToCollection">Add to Collection</a>
-                  <a class="button is-success">Add to Favourites</a>
+                  <a class="button is-info is-light js-modal-trigger" data-target="addToCollection">Add to Collection</a>
+                  <a class="button is-success is-light">Add to Favourites</a>
 						</div>
 					</div>
 					</article>
-                  <a class="button is-danger " href="javascript:history.back()" class="button">Go Back</a>
+                  <a class="button is-danger is-light" href="javascript:history.back()" class="button">Go Back</a>
 				</div>
 			</div>
 		</div>

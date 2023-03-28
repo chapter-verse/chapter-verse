@@ -6,55 +6,52 @@
 					<span class='header-icon user-profile-image'>
 						<img
 							alt=''
-							src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFUP-U9gUQt9OpY50pMStfMMbZj0l3JMCnNQ&usqp=CAU'
+							src='{{imageUrl}}'
 						/>
 					</span>
 				</div>
 
-				<div class='column is-8-tablet is-10-mobile name'>
+				<div class='column is-6-tablet is-10-mobile name'>
 					<p>
 						<span class='white title is-bold'>{{name}}</span>
 					</p>
+                    <hr>
 					<p class='tagline'>
 						{{description}}
 					</p>
-                    <a
-                        class='button is-primary mt-4 px-6 is-small js-modal-trigger'
+				</div>
+				<div class='column is-2-tablet is-10-mobile has-text-centered'>
+					<p class='stat-val'>{{books.length}}</p>
+					<p class='stat-key'>Books</p>
+				</div>
+                <div class='column is-2-tablet is-10-mobile has-text-centered'>
+<a
+                        class='button is-light is-fullwidth is-small js-modal-trigger'
                         data-target='editCollection'
                         id='edit-preferences'
                         style='margin: 5px 0'
                     >
                         Edit Collection
                     </a>
+                    <br>
                     <a
-                        class='button is-primary mt-4 px-6 is-small js-modal-trigger'
-                        data-target=''
+                        class='button is-light is-fullwidth is-small js-modal-trigger'
+                        data-target='coverModal'
                         id='edit-preferences'
                         style='margin: 5px 0'
                     >
                         Edit Picture
                     </a>
+                    <br>
                     <a
-                        class='button is-primary mt-4 px-6 is-small js-modal-trigger'
+                        class='button is-light is-fullwidth is-small js-modal-trigger'
                         data-target='deleteCollection'
                         id='edit-preferences'
                         style='margin: 5px 0'
                     >
                         Delete Collection
                     </a>
-				</div>
-				<div class='column is-2-tablet is-10-mobile has-text-centered'>
-					<p class='stat-val'>{{books.length}}</p>
-					<p class='stat-key'>Books</p>
-				</div>
-				{{!-- <div class='column is-2-tablet is-4-mobile has-text-centered'>
-					<p class='stat-val'>{{collections.length}}</p>
-					<p class='stat-key'>Collections</p>
-				</div> --}}
-				{{!-- <div class='column is-2-tablet is-4-mobile has-text-centered'>
-					<p class='stat-val'>3</p>
-					<p class='stat-key'>Reviews</p>
-				</div> --}}
+                </div>
 			</div>
 		</div>
 		<div class='columns is-mobile is-flex is-flex-wrap-wrap'>
@@ -63,18 +60,18 @@
 						<div class='card is-shady'>
 							<div class='card-image'>
 								<figure class='image is-4by5'>
-									<img src='{{volumeInfo.imageLinks.thumbnail}}' alt='{{volumeInfo.title}}' />
+									<img src='{{this.volumeInfo.imageLinks.thumbnail}}' alt='{{this.volumeInfo.title}}' />
 								</figure>
 							</div>
 							<div class='card-content'>
 								<div class='content'>
 									<h4
 										style='height: 1.5rem;white-space: nowrap;overflow: hidden;text-overflow: ellipsis '
-									>{{volumeInfo.title}}</h4>
+									>{{this.volumeInfo.title}}</h4>
 									<p
 										style='height: 1.5rem;white-space: nowrap;overflow: hidden;text-overflow: ellipsis'
-									>{{volumeInfo.authors}}</p>
-									<a href='/books/{{id}}' class='button is-warning modal-button'>Details</a>
+									>{{this.volumeInfo.authors}}</p>
+									<a href='/books/{{this._id}}' class='button is-warning is-light modal-button'>Details</a>
 								</div>
 							</div>
 						</div>
@@ -135,6 +132,28 @@
 					<span class='button update-modal-close'>Cancel</span>
 				</footer>
 			</div>
+		</div>
+	</div>
+</form>
+<form action='/collections/{{this._id}}/edit-cover' method='post' enctype="multipart/form-data">
+	<div class='modal' id='coverModal'>
+		<div class='modal-background'></div>
+		<div class='modal-card'>
+
+			<header class='modal-card-head'>
+				<p class='modal-card-title'>Edit collection cover</p>
+			</header>
+			<section class='modal-card-body'>
+				<div class='control'>
+					<label class='label'>Image format must be jpg or png</label>
+					<input type="file" name="cover" class="input"/>
+				</div>
+			</section>
+			<footer class='modal-card-foot'>
+				<button class='button is-primary modal-save'>Save changes</button>
+				<span class='button update-modal-close'>Cancel</span>
+			</footer>
+
 		</div>
 	</div>
 </form>

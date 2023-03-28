@@ -6,7 +6,7 @@
 					<span class='header-icon user-profile-image'>
 						<img
 							alt=''
-							src='https://media.istockphoto.com/id/1332100919/de/vektor/m%C3%A4nner-ikone-schwarzes-symbol-personensymbol.jpg?s=612x612&w=0&k=20&c=B18829X05YkUnhCWemZmNjOPekogsD7zQX23ATFS6dQ='
+							src='{{data.imageUrl}}'
 						/>
 					</span>
 				</div>
@@ -14,28 +14,26 @@
 				<div class='column is-4-tablet is-10-mobile name'>
 					<p>
 						<span class='white title is-bold'>{{data.username}}</span>
-						
-						<br />
 					</p>
+					<hr>
 					<p class='tagline'>
 						{{data.description}}
 					</p>
-					<br />
 						<a
-							class='button is-primary mt-4 px-6 is-small js-modal-trigger'
+							class='button is-light mt-4 px-6 is-small js-modal-trigger'
 							data-target='profileModal'
 							id='edit-preferences'
 							style='margin: 5px 0'
 						>
-							Edit Profil
+							Edit profil
 						</a>
 						<a
-							class='button is-primary mt-4 px-6 is-small js-modal-trigger'
-							data-target=''
+							class='button is-light mt-4 px-6 is-small js-modal-trigger'
+							data-target='avatarModal'
 							id='edit-preferences'
 							style='margin: 5px 0'
 						>
-							Edit Picture
+							Edit avatar
 						</a>
 				</div>
 				<div class='column is-2-tablet is-4-mobile has-text-centered'>
@@ -79,30 +77,26 @@
 							<span>My Reviews</span>
 						</a>
 					</li>
-
 				</ul>
 			</div>
 		</div>
 		<div class='box' style='border-radius: 0px;'>
 			<div class='columns'>
-
 				<div class='column is-flex is-justify-content-center'>
 					<div class='field has-addons'>
 						<div class='control'>
 							<p class='control has-icons-left has-icons-right'>
-								<input class='input is-medium' placeholder='Search your Collections' type='text' />
+								<input class='input is-medium' placeholder='Search your collections' type='text' />
 								<span class='icon is-small is-left'>
 									<i class='fas fa-search'></i>
 								</span>
 							</p>
 						</div>
 						<div class='control'>
-							<button class='button is-info is-medium mr-3'>Search</button>
+							<button class='button is-info is-light is-medium mr-3'>Search</button>
 						</div>
 					</div>
-
-					<a class='button is-success is-medium js-modal-trigger' data-target='addToCollection'>Create a Collection</a>
-
+					<a class='button is-success is-light is-medium js-modal-trigger' data-target='addToCollection'>Create a Collection</a>
 				</div>
 			</div>
 		</div>
@@ -114,7 +108,7 @@
 							<figure class='image is-4by3'>
 								<img
 									alt=''
-									src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFUP-U9gUQt9OpY50pMStfMMbZj0l3JMCnNQ&usqp=CAU'
+									src='{{imageUrl}}'
 								/>
 							</figure>
 						</div>
@@ -198,12 +192,16 @@
 			<div class='modal-background'></div>
 			<div class='modal-card'>
 				<header class='modal-card-head'>
-					<p class='modal-card-title'>Create Collection</p>
+					<p class='modal-card-title'>Create collection</p>
 					<span class='delete update-modal-close' aria-label='close'></span>
 				</header>
 				<section class='modal-card-body'>
 					<div class='field'>
-						<label class='label'>Collection Name</label>
+						<label class='label'>Collection cover</label>
+						<input type="file" name="collection-image" />
+					</div>
+					<div class='field'>
+						<label class='label'>Collection name</label>
 						<input type='text' id='update-text' name='name' class='input' />
 					</div>
 					<div class='field'>
@@ -220,34 +218,63 @@
 	</div>
 </form>
 
-<form action='/profile/{{session.currentUser._id}}/edit' method='post'>
+<form action='/profile/{{session.currentUser._id}}/edit' method='post' enctype="multipart/form-data">
 	<div class='modal' id='profileModal'>
 		<div class='modal-background'></div>
 		<div class='modal-card'>
 
 			<header class='modal-card-head'>
-				<p class='modal-card-title'>Edit Profil</p>
+				<p class='modal-card-title'>Edit profil</p>
 
 			</header>
 			<section class='modal-card-body'>
-				<label class='label'>Username</label>
-				<p class='control has-icon has-icon-right'>
-					<input class='input' placeholder='Username' type='text' name='username' value='{{username}}' />
-				</p>
+				<div class='control'>
+					<label class='label'>Username</label>
+					<p class='control has-icon has-icon-right'>
+						<input class='input' placeholder='Username' type='text' name='username' value='{{data.username}}' />
+					</p>
+				</div>
 				<div class='control'>
 					<div class='control-label is-pulled-left'>
-						<label class='label'>Date of Birth</label>
+						<label class='label'>Date of Birth </label>
 					</div>
 					<span>
 						<span class='select'>
-							<input type='date' class='input' name='birthday' value='{{birthday}}' />
+							<input type='date' class='input' name='birthday' value='{{data.birthday}}' />
 						</span>
 					</span>
 				</div>
-				<label class='label'>Description</label>
-				<p class='control'>
-					<textarea class='textarea' placeholder='Describe Yourself!' name='description'>{{description}}</textarea>
-				</p>
+				<div class='control'>
+					<label class='label'>Description</label>
+					<p class='control'>
+						<textarea class='textarea' placeholder='Describe Yourself!' name='description'>{{data.description}}</textarea>
+					</p>
+				</div>
+			</section>
+			<footer class='modal-card-foot'>
+				<button class='button is-primary modal-save'>Save changes</button>
+				<span class='button update-modal-close'>Cancel</span>
+			</footer>
+
+		</div>
+	</div>
+</form>
+
+<form action='/profile/{{session.currentUser._id}}/edit-avatar' method='post' enctype="multipart/form-data">
+	<div class='modal' id='avatarModal'>
+		<div class='modal-background'></div>
+		<div class='modal-card'>
+
+			<header class='modal-card-head'>
+				<p class='modal-card-title'>Edit avatar</p>
+
+			</header>
+			<section class='modal-card-body'>
+				<div class='control'>
+					<label class='label'>Avatar</label>
+					<p>Image format must be jpg or png</p>
+					<input type="file" name="avatar" class="input"/>
+				</div>
 			</section>
 			<footer class='modal-card-foot'>
 				<button class='button is-primary modal-save'>Save changes</button>

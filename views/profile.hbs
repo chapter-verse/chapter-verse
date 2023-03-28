@@ -6,7 +6,7 @@
 					<span class='header-icon user-profile-image'>
 						<img
 							alt=''
-							src='https://media.istockphoto.com/id/1332100919/de/vektor/m%C3%A4nner-ikone-schwarzes-symbol-personensymbol.jpg?s=612x612&w=0&k=20&c=B18829X05YkUnhCWemZmNjOPekogsD7zQX23ATFS6dQ='
+							src='{{data.imageUrl}}'
 						/>
 					</span>
 				</div>
@@ -14,13 +14,12 @@
 				<div class='column is-4-tablet is-10-mobile name'>
 					<p>
 						<span class='white title is-bold'>{{data.username}}</span>
-						
-						<br />
 					</p>
+					<hr>
 					<p class='tagline'>
 						{{data.description}}
 					</p>
-					<br />
+					
 				</div>
 				<div class='column is-2-tablet is-4-mobile has-text-centered'>
 					<p class='stat-val'>{{data.collections.length}}</p>
@@ -74,7 +73,7 @@
 					<div class='field has-addons'>
 						<div class='control'>
 							<p class='control has-icons-left has-icons-right'>
-								<input class='input is-medium' placeholder='Search your Collections' type='text' />
+								<input class='input is-medium' placeholder='Search collections' type='text' />
 								<span class='icon is-small is-left'>
 									<i class='fas fa-search'></i>
 								</span>
@@ -95,7 +94,7 @@
 							<figure class='image is-4by3'>
 								<img
 									alt=''
-									src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFUP-U9gUQt9OpY50pMStfMMbZj0l3JMCnNQ&usqp=CAU'
+									src='{{imageUrl}}'
 								/>
 							</figure>
 						</div>

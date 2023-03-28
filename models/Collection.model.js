@@ -13,7 +13,6 @@ const collectionSchema = new Schema(
 		books: {
 			type: [String],
 			required: false,
-			unique: true,
 		},
 		user: {
 			type: Schema.Types.ObjectId,

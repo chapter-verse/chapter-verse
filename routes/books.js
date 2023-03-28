@@ -16,10 +16,14 @@ router
 					},
 				},
 			);
+			const currentUser = req.session.currentUser.username;
+			const userData = await User.findOne({ currentUser }).populate('collections');
 			const books = response.data.items;
-			res.render('index', { books });
+			res.render('books-list', { books, userData });
+			res.render('books-list', { books });
 		} else {
-			res.render('index');
+			res.render('books-list');
+			res.render('books-list');
 		}
 	})
 	.post((req, res) => {});

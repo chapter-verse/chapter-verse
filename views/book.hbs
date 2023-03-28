@@ -55,9 +55,9 @@
                <p class="modal-card-title">Add to Collection</p>
                <span class="delete update-modal-close" aria-label="close"></span>
             </header>
-            <section class="modal-card-body" style="min-height: 30vh;">
+            <section class="modal-card-body is-flex is-justify-content-center" style="min-height: 30vh;">
                <div class="field">
-                  <div class="select">
+                  <div class="select is-medium">
                      <select name="name">
                         <option hidden> Your Collections</option>
                         {{#each userData.collections}}
@@ -67,11 +67,40 @@
                   </div>
                </div>
             </section>
-            <footer class="modal-card-foot">
-               <button id="save" class="button is-success" type="submit">Save changes</button>
-               <span class="button update-modal-close">Cancel</span>
+            <footer class="modal-card-foot is-flex is-justify-content-center">
+               <button id="save" class="button is-success is-medium" type="submit">Save changes</button>
+               <span class="button update-modal-close is-medium">Cancel</span>
+               <a class="button is-info  js-modal-trigger is-medium" data-target="createCollection">Create a Collection</a>
             </footer>
          </div>
       </div>
    </div>
+</form>
+<form action='/collections/create' method='POST'>
+	<div class='modal' id='createCollection'>
+		<div class='modal-background'></div>
+		<div class='modal-content'>
+			<div class='modal-background'></div>
+			<div class='modal-card'>
+				<header class='modal-card-head'>
+					<p class='modal-card-title'>Add to Collection</p>
+					<span class='delete update-modal-close' aria-label='close'></span>
+				</header>
+				<section class='modal-card-body'>
+					<div class='field'>
+						<label class='label'>Collection Name</label>
+						<input type='text' id='update-text' name='name' class='input  is-medium' value='' />
+					</div>
+					<div class='field'>
+						<label class='label'>Description</label>
+						<textarea class='textarea has-fixed-size is-medium' name='description'></textarea>
+					</div>
+				</section>
+				<footer class='modal-card-foot'>
+					<button id='save' class='button is-success  is-medium' type='submit'>Save changes</button>
+					<span class='button update-modal-close js-modal-trigger is-medium' data-target="addToCollection">Cancel</span>
+				</footer>
+			</div>
+		</div>
+	</div>
 </form>

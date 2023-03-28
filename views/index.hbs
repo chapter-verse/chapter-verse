@@ -28,33 +28,4 @@
 			</div>
 		</form>
 	</div>
-	{{#if books}}
-
-		<section class='container'>
-			<div class='columns features is-flex is-flex-wrap-wrap'>
-				{{#each books}}
-					<div class='column is-3 modal-button' data-target='modal-card'>
-						<div class='card is-shady'>
-							<div class='card-image'>
-								<figure class='image is-4by5'>
-									<img src='{{volumeInfo.imageLinks.thumbnail}}' alt='{{volumeInfo.title}}' />
-								</figure>
-							</div>
-							<div class='card-content'>
-								<div class='content'>
-									<h4
-										style='height: 1.5rem;white-space: nowrap;overflow: hidden;text-overflow: ellipsis '
-									>{{volumeInfo.title}}</h4>
-									<p
-										style='height: 1.5rem;white-space: nowrap;overflow: hidden;text-overflow: ellipsis'
-									>{{volumeInfo.authors}}</p>
-									<a href='/books/{{id}}' class='button is-warning modal-button'>Details</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				{{/each}}
-			</div>
-		</section>
-	{{/if}}
-</div>
+	

@@ -10,15 +10,15 @@
 
 				<div class='column is-6-tablet is-10-mobile name'>
 					<p>
-						<span class='white title is-bold'>{{name}}</span>
+						<span class='white title is-bold'>{{collection.name}}</span>
 					</p>
 					<hr />
 					<p class='tagline'>
-						{{description}}
+						{{collection.description}}
 					</p>
 				</div>
 				<div class='column is-2-tablet is-10-mobile has-text-centered'>
-					<p class='stat-val'>{{books.length}}</p>
+					<p class='stat-val'>{{collection.books.length}}</p>
 					<p class='stat-key'>Books</p>
 				</div>
 				<div class='column is-2-tablet is-10-mobile has-text-centered'>
@@ -48,14 +48,6 @@
 					>
 						Delete Collection
 					</a>
-					<a
-						class='button is-light is-fullwidth is-small'
-						href='javascript: history.back()'
-						id='edit-preferences'
-						style='margin: 5px 0'
-					>
-						Go Back
-					</a>
 				</div>
 			</div>
 		</div>
@@ -65,20 +57,21 @@
 					<div class='card is-shady'>
 						<div class='card-image'>
 							<figure class='image is-4by5'>
-								<img src='{{this.volumeInfo.imageLinks.thumbnail}}' alt='{{this.volumeInfo.title}}' />
+								<img src='{{volumeInfo.imageLinks.thumbnail}}' alt='{{volumeInfo.title}}' />
 							</figure>
 						</div>
 						<div class='card-content'>
 							<div class='content'>
 								<h4
 									style='height: 1.5rem;white-space: nowrap;overflow: hidden;text-overflow: ellipsis '
-								>{{this.volumeInfo.title}}</h4>
+								>{{volumeInfo.title}}</h4>
 								<p
 									style='height: 1.5rem;white-space: nowrap;overflow: hidden;text-overflow: ellipsis'
-								>{{this.volumeInfo.authors}}</p>
+								>{{volumeInfo.authors}}</p>
+
 								<div class='buttons'>
-									<a href='/books/{{this._id}}' class='button is-warning is-light modal-button'>Details</a>
-									<a href='/books/{{this._id}}' class='button is-danger is-light modal-button'>Remove</a>
+									<a href='/books/{{id}}' class='button is-warning is-light modal-button'>Details</a>
+									<a href='/books/{{id}}' class='button is-danger is-light modal-button'>Remove</a>
 								</div>
 							</div>
 						</div>

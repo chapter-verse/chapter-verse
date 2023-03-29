@@ -93,17 +93,23 @@ router.post('/:collectionsId/edit-cover', fileUploader.single('cover'), (req, re
 		});
 });
 
-router.get('/:collectionsId/delete', (req, res, next) => {
-	const { collectionsId } = req.params;
-	const currentUser = req.session.currentUser.username;
-	Collection.findByIdAndDelete(collectionsId)
-		.then(() => {
-			res.redirect(`/profile/${currentUser}`);
-		})
-		.catch((err) => {
-			console.log(err);
-			next(err);
-		});
+router.post('/:collectionsId/delete', async (req, res, next) => {
+	try {
+		const { collectionsId } = req.params;
+		const currentUser = req.session.currentUser.username;
+		const deletedCollection = await Collection.findByIdAndDelete(collectionsId);
+		const user = await User.findOne({ username: currentUser }).populate('collections');
+		const collectionToDeleteIndex = user.collections.findIndex((collection) =>
+			collection._id.equals(deletedCollection._id),
+		);
+		if (collectionToDeleteIndex !== -1) {
+			user.collections.splice(collectionToDeleteIndex, 1);
+			await user.save();
+		}
+		res.redirect('/user/profile');
+	} catch (err) {
+		console.log(err);
+		next(err);
+	}
 });
-
 module.exports = router;

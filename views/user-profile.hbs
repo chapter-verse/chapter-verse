@@ -4,10 +4,7 @@
 			<div class='columns is-mobile is-multiline'>
 				<div class='column is-2'>
 					<span class='header-icon user-profile-image'>
-						<img
-							alt=''
-							src='{{data.imageUrl}}'
-						/>
+						<img alt='' src='{{data.imageUrl}}' />
 					</span>
 				</div>
 
@@ -15,26 +12,26 @@
 					<p>
 						<span class='white title is-bold'>{{data.username}}</span>
 					</p>
-					<hr>
+					<hr />
 					<p class='tagline'>
 						{{data.description}}
 					</p>
-						<a
-							class='button is-light mt-4 px-6 is-small js-modal-trigger'
-							data-target='profileModal'
-							id='edit-preferences'
-							style='margin: 5px 0'
-						>
-							Edit profil
-						</a>
-						<a
-							class='button is-light mt-4 px-6 is-small js-modal-trigger'
-							data-target='avatarModal'
-							id='edit-preferences'
-							style='margin: 5px 0'
-						>
-							Edit avatar
-						</a>
+					<a
+						class='button is-light mt-4 px-6 is-small js-modal-trigger'
+						data-target='profileModal'
+						id='edit-preferences'
+						style='margin: 5px 0'
+					>
+						Edit profil
+					</a>
+					<a
+						class='button is-light mt-4 px-6 is-small js-modal-trigger'
+						data-target='avatarModal'
+						id='edit-preferences'
+						style='margin: 5px 0'
+					>
+						Edit avatar
+					</a>
 				</div>
 				<div class='column is-2-tablet is-4-mobile has-text-centered'>
 					<p class='stat-val'>{{data.collections.length}}</p>
@@ -106,10 +103,7 @@
 					<div class='card'>
 						<div class='card-image'>
 							<figure class='image is-4by3'>
-								<img
-									alt=''
-									src='{{imageUrl}}'
-								/>
+								<img alt='' src='{{imageUrl}}' />
 							</figure>
 						</div>
 						<div class='card-content'>
@@ -120,7 +114,7 @@
 							</div>
 						</div>
 						<footer class='card-footer'>
-							<a class='card-footer-item' href="/collections/{{this._id}}">Details</a>
+							<a class='card-footer-item' href='/collections/{{this._id}}'>Details</a>
 							<a class='card-footer-item js-modal-trigger' data-target='editCollection'>Edit</a>
 							<a class='card-footer-item js-modal-trigger' data-target='deleteCollection'>Delete</a>
 						</footer>
@@ -154,7 +148,8 @@
 						</div>
 					</div>
 				</form>
-				<form action='/collections/{{this._id}}/delete' method='GET'>
+
+				<form action='/collections/{{this._id}}/delete' method='POST'>
 					<div class='modal' id='deleteCollection'>
 						<div class='modal-background'></div>
 						<div class='modal-content'>
@@ -167,7 +162,8 @@
 								<section class='modal-card-body'>
 									<div class='field'>
 										<label class='label'>
-										Are you sure you want to delete this collection : {{this.name}}
+											Are you sure you want to delete
+											{{this.name}}
 										</label>
 									</div>
 								</section>
@@ -198,7 +194,7 @@
 				<section class='modal-card-body'>
 					<div class='field'>
 						<label class='label'>Collection cover</label>
-						<input type="file" name="cover" class="input"/>
+						<input type='file' name='cover' class='input' />
 					</div>
 					<div class='field'>
 						<label class='label'>Collection name</label>
@@ -218,14 +214,12 @@
 	</div>
 </form>
 
-<form action='/profile/{{session.currentUser._id}}/edit' method='post'">
+<form action='/profile/{{session.currentUser._id}}/edit' method='post'>
 	<div class='modal' id='profileModal'>
 		<div class='modal-background'></div>
 		<div class='modal-card'>
-
 			<header class='modal-card-head'>
-				<p class='modal-card-title'>Edit profil</p>
-
+				<p class='modal-card-title'>Edit profile</p>
 			</header>
 			<section class='modal-card-body'>
 				<div class='control'>
@@ -255,19 +249,16 @@
 				<button class='button is-primary modal-save'>Save changes</button>
 				<span class='button update-modal-close'>Cancel</span>
 			</footer>
-
 		</div>
 	</div>
 </form>
 
-<form action='/profile/{{session.currentUser._id}}/edit-avatar' method='post' enctype="multipart/form-data">
+<form action='/profile/{{session.currentUser._id}}/edit-avatar' method='post' enctype='multipart/form-data'>
 	<div class='modal' id='avatarModal'>
 		<div class='modal-background'></div>
 		<div class='modal-card'>
-
 			<header class='modal-card-head'>
 				<p class='modal-card-title'>Edit avatar</p>
-
 			</header>
 			<section class='modal-card-body'>
 				<div class='control'>
@@ -275,15 +266,13 @@
 				</div>
 				<div class='control'>
 					<label class='label'>Or add yours</label>
-					<input type="file" name="avatar" class="input"/>
+					<input type='file' name='avatar' class='input' />
 				</div>
 			</section>
 			<footer class='modal-card-foot'>
 				<button class='button is-primary modal-save'>Save changes</button>
 				<span class='button update-modal-close'>Cancel</span>
 			</footer>
-
 		</div>
 	</div>
 </form>
-

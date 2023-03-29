@@ -7,6 +7,20 @@ const User = require('../models/User.model');
 router
 	.route('/')
 	.get(async (req, res) => {
+		const currentUser = req.session.currentUser.username;
+		const userData = await User.findOne({ currentUser }).populate('collections');
+		const collections = userData.collections;
+		const bookData = collections
+			.map((collection) => {
+				const books = collection.books.map((book, index) => {
+					return book;
+				});
+				return books;
+			})
+			.flat();
+
+		console.log(bookData);
+
 		if (req.query.search) {
 			const response = await axios.get(
 				`https://www.googleapis.com/books/v1/volumes?q=${req.query.search}&filter=partial&maxResults=40&key=${process.env.KEY}`,
@@ -16,10 +30,9 @@ router
 					},
 				},
 			);
-			const currentUser = req.session.currentUser.username;
-			const userData = await User.findOne({ currentUser }).populate('collections');
+
 			const books = response.data.items;
-			res.render('books-list', { books, userData });
+			res.render('books-list', { books, userData, bookData });
 		} else {
 			res.render('books-list');
 		}
@@ -33,12 +46,11 @@ router
 		try {
 			const { name, bookId } = req.body;
 			const currentUser = req.session.currentUser.username;
-			const response = await axios.get(`https://www.googleapis.com/books/v1/volumes/${bookId}`, {
+			await axios.get(`https://www.googleapis.com/books/v1/volumes/${bookId}`, {
 				headers: {
 					'Referrer-Policy': 'no-referrer-when-downgrade',
 				},
 			});
-
 			const user = await User.findOne({ currentUser }).populate('collections');
 			const collection = user.collections.find((collection) => collection.name === name);
 			collection.books.push(bookId);

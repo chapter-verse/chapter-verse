@@ -12,9 +12,8 @@ router
 	.post(async (req, res) => {
 		try {
 			const { name, description } = req.body;
-			console.log(req.body);
 			const currentUser = req.session.currentUser.username;
-			const user = await User.findOne({ currentUser });
+			const user = await User.findOne({ username: currentUser });
 			const collection = await Collection.create({
 				name,
 				description,

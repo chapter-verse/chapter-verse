@@ -30,21 +30,24 @@ router
 	.route('/add')
 	.get((req, res) => {})
 	.post(async (req, res) => {
-		console.log(req.body);
-		// const currentUser = req.session.currentUser.username;
-		// const response = await axios.get(`https://www.googleapis.com/books/v1/volumes/${req.params.bookId}`, {
-		// 	headers: {
-		// 		'Referrer-Policy': 'no-referrer-when-downgrade',
-		// 	},
-		// });
-		// const book = response.data;
-		// const bookId = book.id;
-		// const user = await User.findOne({ currentUser }).populate('collections');
-		// const collection = user.collections.find((collection) => collection.name === name);
-		// collection.books.push(bookId);
-		// await collection.save();
-		// await user.save();
-		// res.redirect(`/books/${bookId}`);
+		try {
+			const { name, bookId } = req.body;
+			const currentUser = req.session.currentUser.username;
+			const response = await axios.get(`https://www.googleapis.com/books/v1/volumes/${bookId}`, {
+				headers: {
+					'Referrer-Policy': 'no-referrer-when-downgrade',
+				},
+			});
+
+			const user = await User.findOne({ currentUser }).populate('collections');
+			const collection = user.collections.find((collection) => collection.name === name);
+			collection.books.push(bookId);
+			await collection.save();
+			await user.save();
+			res.redirect(`/books/${bookId}`);
+		} catch (err) {
+			console.log(err);
+		}
 	});
 
 router

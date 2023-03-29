@@ -115,13 +115,13 @@
 						</div>
 						<footer class='card-footer'>
 							<a class='card-footer-item' href='/collections/{{this._id}}'>Details</a>
-							<a class='card-footer-item js-modal-trigger' data-target='editCollection'>Edit</a>
-							<a class='card-footer-item js-modal-trigger' data-target='deleteCollection'>Delete</a>
+							<a class='card-footer-item js-modal-trigger' data-target='editCollectionForm-{{this._id}}'>Edit</a>
+							<a class='card-footer-item js-modal-trigger' data-target='deleteCollectionForm-{{this._id}}'>Delete</a>
 						</footer>
 					</div>
 				</div>
 				<form action='/collections/{{this._id}}/edit' method='POST'>
-					<div class='modal' id='editCollection'>
+					<div class='modal' id='editCollectionForm-{{this._id}}'>
 						<div class='modal-background'></div>
 						<div class='modal-content'>
 							<div class='modal-background'></div>
@@ -150,7 +150,7 @@
 				</form>
 
 				<form action='/collections/{{this._id}}/delete' method='POST'>
-					<div class='modal' id='deleteCollection'>
+					<div class='modal' id='deleteCollectionForm-{{this._id}}'>
 						<div class='modal-background'></div>
 						<div class='modal-content'>
 							<div class='modal-background'></div>

@@ -26,30 +26,32 @@
 					<a
 						class='button is-light is-fullwidth is-small js-modal-trigger'
 						data-target='editCollection'
-						id='edit-preferences'
-						style='margin: 5px 0'
+						style='margin: 10px 0'
 					>
 						Edit Collection
 					</a>
-					<br />
 					<a
 						class='button is-light is-fullwidth is-small js-modal-trigger'
 						data-target='coverModal'
-						id='edit-preferences'
-						style='margin: 5px 0'
+						style='margin: 10px 0'
 					>
 						Edit Picture
 					</a>
-					<br />
 					<a
 						class='button is-light is-fullwidth is-small js-modal-trigger'
 						data-target='deleteCollection'
-						id='edit-preferences'
-						style='margin: 5px 0'
+						style='margin: 10px 0'
 					>
 						Delete Collection
 					</a>
                     {{/if}}
+					<a
+						class='button is-light is-fullwidth is-small js-modal-trigger'
+						href="javascript:history.back()"
+						style='margin: 10px 0'
+					>
+						Back
+					</a>
 				</div>
 			</div>
 		</div>
@@ -73,14 +75,39 @@
 
 								<div class='buttons'>
 									<a target='_blank' href='/books/{{id}}' class='button is-warning is-light modal-button'>Details</a>
-									<a data-target='deleteBook' class='button is-danger is-light modal-button'>Remove</a>
-                                    {{#if verificationObject.property}}
-                                    {{/if}}
+							        <a class='button is-danger is-light modal-button js-modal-trigger' data-target='deleteBookForm-{{id}}'>Delete</a>
+                                    {{!-- {{#if verificationObject.property}}
+                                    {{/if}} --}}
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+                <form action='/books/{{id}}/delete' method='POST'>
+					<div class='modal' id='deleteBookForm-{{id}}'>
+						<div class='modal-background'></div>
+						<div class='modal-content'>
+							<div class='modal-background'></div>
+							<div class='modal-card'>
+								<header class='modal-card-head'>
+									<p class='modal-card-title'>Delete book from collection</p>
+									<span class='delete update-modal-close' aria-label='close'></span>
+								</header>
+								<section class='modal-card-body'>
+									<div class='field'>
+										<label class='label'>
+											Are you sure you want to delete {{volumeInfo.title}}
+										</label>
+									</div>
+								</section>
+								<footer class='modal-card-foot'>
+									<button id='save' class='button is-success' type='submit'>Delete</button>
+									<span class='button update-modal-close'>Cancel</span>
+								</footer>
+							</div>
+						</div>
+					</div>
+				</form>
 			{{/each}}
 		</div>
 	</div>
@@ -114,6 +141,27 @@
 		</div>
 	</div>
 </form>
+<form action='/collections/{{this._id}}/edit-cover' method='post' enctype='multipart/form-data'>
+	<div class='modal' id='coverModal'>
+		<div class='modal-background'></div>
+		<div class='modal-card'>
+
+			<header class='modal-card-head'>
+				<p class='modal-card-title'>Edit collection cover</p>
+			</header>
+			<section class='modal-card-body'>
+                    <div class='control'>
+                        <label class='label'>Image format must be jpg or png</label>
+					<input type='file' name='cover' class='input' />
+				</div>
+			</section>
+			<footer class='modal-card-foot'>
+				<button class='button is-primary modal-save'>Save changes</button>
+				<span class='button update-modal-close'>Cancel</span>
+			</footer>
+		</div>
+	</div>
+</form>
 <form action='/collections/{{this._id}}/delete' method='POST'>
 	<div class='modal' id='deleteCollection'>
 		<div class='modal-background'></div>
@@ -137,54 +185,6 @@
 					<span class='button update-modal-close'>Cancel</span>
 				</footer>
 			</div>
-		</div>
-	</div>
-</form>
-<form action='/books/{{this._id}}/delete' method='POST'>
-	<div class='modal' id='deleteBook'>
-		<div class='modal-background'></div>
-		<div class='modal-content'>
-			<div class='modal-background'></div>
-			<div class='modal-card'>
-				<header class='modal-card-head'>
-					<p class='modal-card-title'>Delete book</p>
-					<span class='delete update-modal-close' aria-label='close'></span>
-				</header>
-				<section class='modal-card-body'>
-					<div class='field'>
-						<label class='label'>
-							Are you sure you want to delete
-							{{name}}
-						</label>
-					</div>
-				</section>
-				<footer class='modal-card-foot'>
-					<button id='save' class='button is-success' type='submit'>Delete</button>
-					<span class='button update-modal-close'>Cancel</span>
-				</footer>
-			</div>
-		</div>
-	</div>
-</form>
-<form action='/collections/{{this._id}}/edit-cover' method='post' enctype='multipart/form-data'>
-	<div class='modal' id='coverModal'>
-		<div class='modal-background'></div>
-		<div class='modal-card'>
-
-			<header class='modal-card-head'>
-				<p class='modal-card-title'>Edit collection cover</p>
-			</header>
-			<section class='modal-card-body'>
-                    <div class='control'>
-                        <label class='label'>Image format must be jpg or png</label>
-					<input type='file' name='cover' class='input' />
-				</div>
-			</section>
-			<footer class='modal-card-foot'>
-				<button class='button is-primary modal-save'>Save changes</button>
-				<span class='button update-modal-close'>Cancel</span>
-			</footer>
-
 		</div>
 	</div>
 </form>

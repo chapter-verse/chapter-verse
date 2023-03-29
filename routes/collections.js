@@ -13,9 +13,8 @@ router
 	.post(async (req, res) => {
 		try {
 			const { name, description } = req.body;
-			console.log(req.body);
 			const currentUser = req.session.currentUser.username;
-			const user = await User.findOne({ currentUser });
+			const user = await User.findOne({ username: currentUser });
 			const collection = await Collection.create({
 				name,
 				description,
@@ -92,16 +91,11 @@ router.post('/:collectionsId/delete', async (req, res, next) => {
 	try {
 		const { collectionsId } = req.params;
 		const currentUser = req.session.currentUser.username;
-		const deletedCollection = await Collection.findByIdAndDelete(collectionsId);
 		const user = await User.findOne({ username: currentUser }).populate('collections');
-		const collectionToDeleteIndex = user.collections.findIndex((collection) =>
-			collection._id.equals(deletedCollection._id),
-		);
-		if (collectionToDeleteIndex !== -1) {
-			user.collections.splice(collectionToDeleteIndex, 1);
-			await user.save();
-		}
-		res.redirect('/user/profile');
+		user.collections.pull(collectionsId);
+		await user.save();
+		await Collection.findByIdAndDelete(collectionsId);
+		res.redirect(`/profile/${currentUser}`);
 	} catch (err) {
 		console.log(err);
 		next(err);

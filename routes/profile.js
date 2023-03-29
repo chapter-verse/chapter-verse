@@ -35,20 +35,18 @@ router.get('/:username', (req, res) => {
 	}
 });
 
-module.exports = router;
-
 router.post('/:userId/edit', (req, res, next) => {
 	console.log(req);
 	const { userId } = req.params;
 	const { username, description, birthday } = req.body;
-
+	
 	User.findByIdAndUpdate(userId, { username, description, birthday}, { new: true })
-		.then(() => {
-			res.redirect(`/profile/${username}`);
-		})
-		.catch((err) => {
-			console.log(err);
-			next(err);
+	.then(() => {
+		res.redirect(`/profile/${username}`);
+	})
+	.catch((err) => {
+		console.log(err);
+		next(err);
 		});
 });
 
@@ -64,3 +62,5 @@ router.post('/:userId/edit-avatar',fileUploader.single('avatar'), (req, res, nex
 			next(err);
 		});
 });
+
+module.exports = router;

@@ -18,6 +18,10 @@ const collectionSchema = new Schema(
 			ref: 'User',
 			required: true,
 		},
+		imageUrl: {
+			type: String,
+			default: 'https://res.cloudinary.com/dsbfbwbvq/image/upload/v1680046581/Chapter-Verse/dggnf8eabz4hw6hpc8ur.png'
+		}
 	},
 	{
 		timestamps: true,

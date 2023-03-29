@@ -40,7 +40,7 @@ const userSchema = new Schema(
 		],
 		imageUrl: {
 			type: String,
-			default: 'https://res.cloudinary.com/dsbfbwbvq/image/upload/v1680046992/Chapter-Verse/fhjzz9kcyyyzh6uio6qk.png'
+			default: 'https://res.cloudinary.com/dsbfbwbvq/image/upload/v1680051413/Chapter-Verse/Avatar_01_scbhma.jpg'
 		}
 	},
 	{

@@ -27,6 +27,27 @@ router
 	.post((req, res) => {});
 
 router
+	.route('/add')
+	.get((req, res) => {})
+	.post(async (req, res) => {
+		console.log(req.body);
+		// const currentUser = req.session.currentUser.username;
+		// const response = await axios.get(`https://www.googleapis.com/books/v1/volumes/${req.params.bookId}`, {
+		// 	headers: {
+		// 		'Referrer-Policy': 'no-referrer-when-downgrade',
+		// 	},
+		// });
+		// const book = response.data;
+		// const bookId = book.id;
+		// const user = await User.findOne({ currentUser }).populate('collections');
+		// const collection = user.collections.find((collection) => collection.name === name);
+		// collection.books.push(bookId);
+		// await collection.save();
+		// await user.save();
+		// res.redirect(`/books/${bookId}`);
+	});
+
+router
 	.route('/:bookId')
 	.get(async (req, res) => {
 		const response = await axios.get(`https://www.googleapis.com/books/v1/volumes/${req.params.bookId}`, {

@@ -6,46 +6,46 @@ const bcrypt = require('bcrypt');
 const axios = require('axios');
 const fileUploader = require('../config/cloudinary.config');
 
-// router
-// 	.route('/create')
-// 	.get((req, res) => {})
-// 	.post(async (req, res) => {
-// 		try {
-// 			const { name, description } = req.body;
-// 			console.log(req.body);
-// 			const currentUser = req.session.currentUser.username;
-// 			const user = await User.findOne({ currentUser });
-// 			const collection = await Collection.create({
-// 				name,
-// 				description,
-// 				user: req.session.currentUser,
-// 			});
-// 			user.collections.push(collection);
-// 			await user.save();
-// 			await collection.save();
-// 			res.redirect(`/profile/${currentUser}`);
-// 		} catch (err) {
-// 			console.log(err);
-// 		}
-// 	});
-
-router.post('/create', fileUploader.single('cover'), (req, res, next) => {
-	console.log(req);
-	const { username } = req.session.currentUser;
-	const { name, description } = req.body;
-	Collection.create({ name, description, user: req.session.currentUser, imageUrl: req.file.path }, { new: true })
-		.then(() => {
-			// User.findOne(username)
-			// .then(() => {
-			//     user.collections.push(collection);
+router
+	.route('/create')
+	.get((req, res) => {})
+	.post(async (req, res) => {
+		try {
+			const { name, description } = req.body;
+			console.log(req.body);
+			const currentUser = req.session.currentUser.username;
+			const user = await User.findOne({ currentUser });
+			const collection = await Collection.create({
+				name,
+				description,
+				user: req.session.currentUser,
+			});
+			user.collections.push(collection);
+			await user.save();
+			await collection.save();
 			res.redirect(`/profile/${currentUser}`);
-			// });
-		})
-		.catch((err) => {
+		} catch (err) {
 			console.log(err);
-			next(err);
-		});
-});
+		}
+	});
+
+// router.post('/create', fileUploader.single('cover'), (req, res, next) => {
+// 	console.log(req);
+// 	const { username } = req.session.currentUser;
+// 	const { name, description } = req.body;
+// 	Collection.create({ name, description, user: req.session.currentUser, imageUrl: req.file.path }, { new: true })
+// 		.then(() => {
+// 			// User.findOne(username)
+// 			// .then(() => {
+// 			//     user.collections.push(collection);
+// 			res.redirect(`/profile/${currentUser}`);
+// 			// });
+// 		})
+// 		.catch((err) => {
+// 			console.log(err);
+// 			next(err);
+// 		});
+// });
 
 router.get('/:collectionsId', async (req, res) => {
 	try {
@@ -97,19 +97,15 @@ router.post('/:collectionsId/delete', async (req, res, next) => {
 	try {
 		const { collectionsId } = req.params;
 		const currentUser = req.session.currentUser.username;
-		const deletedCollection = await Collection.findByIdAndDelete(collectionsId);
 		const user = await User.findOne({ username: currentUser }).populate('collections');
-		const collectionToDeleteIndex = user.collections.findIndex((collection) =>
-			collection._id.equals(deletedCollection._id),
-		);
-		if (collectionToDeleteIndex !== -1) {
-			user.collections.splice(collectionToDeleteIndex, 1);
-			await user.save();
-		}
-		res.redirect('/user/profile');
+		user.collections.pull(collectionsId);
+		await user.save();
+		await Collection.findByIdAndDelete(collectionsId);
+		res.redirect(`/profile/${currentUser}`);
 	} catch (err) {
 		console.log(err);
 		next(err);
 	}
 });
+
 module.exports = router;

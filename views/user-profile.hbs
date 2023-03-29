@@ -116,12 +116,12 @@
 							<div class='content'>
 								<span class='tag is-dark subtitle'>Books: {{books.length}}</span>
 								<p class='title is-4'>{{name}}</p>
-								<p>{{description}}</p>
+								<p style='height: 1.5rem;white-space: nowrap; overflow: hidden;text-overflow: ellipsis'>{{description}}</p>
 							</div>
 						</div>
 						<footer class='card-footer'>
-							<a class='card-footer-item js-modal-trigger'	data-target='editCollection'>Edit</a>
 							<a class='card-footer-item' href="/collections/{{this._id}}">Details</a>
+							<a class='card-footer-item js-modal-trigger' data-target='editCollection'>Edit</a>
 							<a class='card-footer-item js-modal-trigger' data-target='deleteCollection'>Delete</a>
 						</footer>
 					</div>

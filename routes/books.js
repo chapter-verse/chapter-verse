@@ -12,15 +12,12 @@ router
 		const collections = userData.collections;
 		const bookData = collections
 			.map((collection) => {
-				const books = collection.books.map((book, index) => {
+				const books = collection.books.map((book) => {
 					return book;
 				});
 				return books;
 			})
 			.flat();
-
-		console.log(bookData);
-
 		if (req.query.search) {
 			const response = await axios.get(
 				`https://www.googleapis.com/books/v1/volumes?q=${req.query.search}&filter=partial&maxResults=40&key=${process.env.KEY}`,
@@ -30,7 +27,6 @@ router
 					},
 				},
 			);
-
 			const books = response.data.items;
 			res.render('books-list', { books, userData, bookData });
 		} else {

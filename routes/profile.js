@@ -40,7 +40,7 @@ router.post('/:userId/edit', (req, res, next) => {
 	const { userId } = req.params;
 	const { username, description, birthday } = req.body;
 
-	User.findByIdAndUpdate(userId, { username, description, birthday, imageUrl: req.file.path }, { new: true })
+	User.findByIdAndUpdate(userId, { username, description, birthday}, { new: true })
 		.then(() => {
 			res.redirect(`/profile/${username}`);
 		})
@@ -51,7 +51,6 @@ router.post('/:userId/edit', (req, res, next) => {
 });
 
 router.post('/:userId/edit-avatar',fileUploader.single('avatar'), (req, res, next) => {
-	console.log(req)
 	const { userId } = req.params;
 	const {username} = req.session.currentUser
 	User.findByIdAndUpdate(userId, {imageUrl: req.file.path}, { new: true })

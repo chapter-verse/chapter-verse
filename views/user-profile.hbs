@@ -198,7 +198,7 @@
 				<section class='modal-card-body'>
 					<div class='field'>
 						<label class='label'>Collection cover</label>
-						<input type="file" name="collection-image" />
+						<input type="file" name="cover" class="input"/>
 					</div>
 					<div class='field'>
 						<label class='label'>Collection name</label>
@@ -218,7 +218,7 @@
 	</div>
 </form>
 
-<form action='/profile/{{session.currentUser._id}}/edit' method='post' enctype="multipart/form-data">
+<form action='/profile/{{session.currentUser._id}}/edit' method='post'">
 	<div class='modal' id='profileModal'>
 		<div class='modal-background'></div>
 		<div class='modal-card'>
@@ -271,8 +271,10 @@
 			</header>
 			<section class='modal-card-body'>
 				<div class='control'>
-					<label class='label'>Avatar</label>
-					<p>Image format must be jpg or png</p>
+					<label class='label'>Avatars :</label>
+				</div>
+				<div class='control'>
+					<label class='label'>Or add yours</label>
 					<input type="file" name="avatar" class="input"/>
 				</div>
 			</section>

@@ -94,4 +94,29 @@ router
 		res.redirect(`/books/${bookId}`);
 	});
 
+router.post('/:bookId/delete', (req, res, next) => {
+	const { bookId } = req.params;
+	console.log(req)
+	const collectionId =
+	Collection.findById(collectionsId)
+		.then(deletedCollection => {
+			return User.findOne({ username: currentUser })
+				.populate('collections')
+				.then(user => {
+					const collectionToDeleteIndex = user.collections.findIndex(collection => collection._id.equals(deletedCollection._id));
+					if (collectionToDeleteIndex !== -1) {
+						user.collections.splice(collectionToDeleteIndex, 1);
+						return user.save();
+					}
+				})
+				.then(() => {
+					res.redirect('/user/profile');
+				});
+		})
+		.catch(error => {
+			console.log(error);
+			next(error);
+		});
+});
+
 module.exports = router;

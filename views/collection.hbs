@@ -4,7 +4,7 @@
 			<div class='columns is-mobile is-multiline'>
 				<div class='column is-2-tablet is-10-mobile'>
 					<span class='header-icon user-profile-image'>
-						<img alt='' src='{{imageUrl}}' />
+						<img alt='' src='{{collection.imageUrl}}' />
 					</span>
 				</div>
 
@@ -22,6 +22,7 @@
 					<p class='stat-key'>Books</p>
 				</div>
 				<div class='column is-2-tablet is-10-mobile has-text-centered'>
+                    {{#if verificationObject.property}}
 					<a
 						class='button is-light is-fullwidth is-small js-modal-trigger'
 						data-target='editCollection'
@@ -48,6 +49,7 @@
 					>
 						Delete Collection
 					</a>
+                    {{/if}}
 				</div>
 			</div>
 		</div>
@@ -71,7 +73,9 @@
 
 								<div class='buttons'>
 									<a target='_blank' href='/books/{{id}}' class='button is-warning is-light modal-button'>Details</a>
-									<a href='/books/{{id}}' class='button is-danger is-light modal-button'>Remove</a>
+									<a data-target='deleteBook' class='button is-danger is-light modal-button'>Remove</a>
+                                    {{#if verificationObject.property}}
+                                    {{/if}}
 								</div>
 							</div>
 						</div>
@@ -136,6 +140,32 @@
 		</div>
 	</div>
 </form>
+<form action='/books/{{this._id}}/delete' method='POST'>
+	<div class='modal' id='deleteBook'>
+		<div class='modal-background'></div>
+		<div class='modal-content'>
+			<div class='modal-background'></div>
+			<div class='modal-card'>
+				<header class='modal-card-head'>
+					<p class='modal-card-title'>Delete book</p>
+					<span class='delete update-modal-close' aria-label='close'></span>
+				</header>
+				<section class='modal-card-body'>
+					<div class='field'>
+						<label class='label'>
+							Are you sure you want to delete
+							{{name}}
+						</label>
+					</div>
+				</section>
+				<footer class='modal-card-foot'>
+					<button id='save' class='button is-success' type='submit'>Delete</button>
+					<span class='button update-modal-close'>Cancel</span>
+				</footer>
+			</div>
+		</div>
+	</div>
+</form>
 <form action='/collections/{{this._id}}/edit-cover' method='post' enctype='multipart/form-data'>
 	<div class='modal' id='coverModal'>
 		<div class='modal-background'></div>
@@ -145,8 +175,8 @@
 				<p class='modal-card-title'>Edit collection cover</p>
 			</header>
 			<section class='modal-card-body'>
-				<div class='control'>
-					<label class='label'>Image format must be jpg or png</label>
+                    <div class='control'>
+                        <label class='label'>Image format must be jpg or png</label>
 					<input type='file' name='cover' class='input' />
 				</div>
 			</section>

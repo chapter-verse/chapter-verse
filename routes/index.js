@@ -36,7 +36,6 @@ router
 			const books = await Promise.all(promises);
 			res.render('index', { books, userData, bookData });
 		} else {
-			const collections = userData.collections;
 			const bookData = collections
 				.map((collection) => {
 					const books = collection.books.map((book) => {

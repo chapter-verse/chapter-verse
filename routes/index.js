@@ -36,14 +36,6 @@ router
 			const books = await Promise.all(promises);
 			res.render('index', { books, userData, bookData });
 		} else {
-			const bookData = collections
-				.map((collection) => {
-					const books = collection.books.map((book) => {
-						return book;
-					});
-					return books;
-				})
-				.flat();
 			const queries = getRandomQueries(4);
 			const promises = queries.map(async (query) => {
 				const response = await axios.get(
@@ -60,7 +52,7 @@ router
 				}
 			});
 			const books = await Promise.all(promises);
-			res.render('index', { books, bookData });
+			res.render('index', { books });
 		}
 	})
 	.post((req, res) => {});

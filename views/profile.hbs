@@ -1,0 +1,116 @@
+<div class='columns'>
+	<div class='container profile'>
+		<div class='section profile-heading'>
+			<div class='columns is-mobile is-multiline'>
+				<div class='column is-2'>
+					<span class='header-icon user-profile-image'>
+						<img
+							alt=''
+							src='{{data.imageUrl}}'
+						/>
+					</span>
+				</div>
+
+				<div class='column is-4-tablet is-10-mobile name'>
+					<p>
+						<span class='white title is-bold'>{{data.username}}</span>
+					</p>
+					<hr>
+					<p class='tagline'>
+						{{data.description}}
+					</p>
+					
+				</div>
+				<div class='column is-2-tablet is-4-mobile has-text-centered'>
+					<p class='stat-val'>{{data.collections.length}}</p>
+					<p class='stat-key'>Collections</p>
+				</div>
+				<div class='column is-2-tablet is-4-mobile has-text-centered'>
+					<p class='stat-val'>{{booksNb}}</p>
+					<p class='stat-key'>Books</p>
+				</div>
+				<div class='column is-2-tablet is-4-mobile has-text-centered'>
+					<p class='stat-val'>0</p>
+					<p class='stat-key'>Reviews</p>
+				</div>
+			</div>
+		</div>
+		<div class='profile-options is-fullwidth'>
+			<div class='tabs is-fullwidth is-medium'>
+				<ul>
+					<li class='link is-active'>
+						<a>
+							<span class='icon'>
+								<i class='fa fa-list'></i>
+							</span>
+							<span>My Collections</span>
+						</a>
+					</li>
+					<li class='link'>
+						<a>
+							<span class='icon'>
+								<i class='fa fa-book'></i>
+							</span>
+							<span>My Books</span>
+						</a>
+					</li>
+					<li class='link'>
+						<a>
+							<span class='icon'>
+								<i class='fa fa-comment'></i>
+							</span>
+							<span>My Reviews</span>
+						</a>
+					</li>
+
+				</ul>
+			</div>
+		</div>
+		<div class='box' style='border-radius: 0px;'>
+			<div class='columns'>
+
+				<div class='column is-flex is-justify-content-center'>
+					<div class='field has-addons'>
+						<div class='control'>
+							<p class='control has-icons-left has-icons-right'>
+								<input class='input is-medium' placeholder='Search collections' type='text' />
+								<span class='icon is-small is-left'>
+									<i class='fas fa-search'></i>
+								</span>
+							</p>
+						</div>
+						<div class='control'>
+							<button class='button is-info is-medium mr-3'>Search</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class='columns is-mobile is-flex is-flex-wrap-wrap'>
+			{{#each data.collections}}
+				<div class='column is-3-tablet is-6-mobile mx-auto'>
+					<div class='card'>
+						<div class='card-image'>
+							<figure class='image is-4by3'>
+								<img
+									alt=''
+									src='{{imageUrl}}'
+								/>
+							</figure>
+						</div>
+						<div class='card-content'>
+							<div class='content'>
+								<span class='tag is-dark subtitle'>Books: {{books.length}}</span>
+								<p class='title is-4'>{{name}}</p>
+								<p>{{description}}</p>
+							</div>
+						</div>
+						<footer class='card-footer'>
+							<a class='card-footer-item' href="/collections/{{this._id}}">Details</a>
+						</footer>
+					</div>
+				</div>
+			{{/each}}
+		</div>
+	</div>
+</div>

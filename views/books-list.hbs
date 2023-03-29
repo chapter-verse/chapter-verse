@@ -1,56 +1,62 @@
 <div class='container is-flex is-justify-content-center my-6'>
-		<form action='/books' method='GET'>
-			<div class='field has-addons'>
-				<div class='control'>
-					<p class='control has-icons-left has-icons-right'>
-						<input class='input is-medium' type='text' placeholder='Search' name='search' value='' />
-						<span class='icon is-small is-left'>
-							<i class='fas fa-search'></i>
-						</span>
-					</p>
-				</div>
-				<div class='control'>
-					<button class='button is-info is-medium'>Search</button>
-				</div>
+	<form action='/books' method='GET'>
+		<div class='field has-addons'>
+			<div class='control'>
+				<p class='control has-icons-left has-icons-right'>
+					<input class='input is-medium' type='text' placeholder='Search' name='search' value='' />
+					<span class='icon is-small is-left'>
+						<i class='fas fa-search'></i>
+					</span>
+				</p>
 			</div>
-		</form>
-	</div>
+			<div class='control'>
+				<button class='button is-info is-medium'>Search</button>
+			</div>
+		</div>
+	</form>
+</div>
 
 {{#if books}}
-
-		<section class='container'>
-			<div class='columns features is-flex is-flex-wrap-wrap'>
-				{{#each books}}
-					<div class='column is-3 modal-button' data-target='modal-card'>
-						<div class='card is-shady'>
-							<div class='card-image'>
-								<figure class='image is-4by5'>
-									<img src='{{volumeInfo.imageLinks.thumbnail}}' alt='{{volumeInfo.title}}' />
-								</figure>
-							</div>
-							<div class='card-content'>
-								<div class='content'>
-									<h4
-										style='height: 1.5rem;white-space: nowrap;overflow: hidden;text-overflow: ellipsis '
-									>{{volumeInfo.title}}</h4>
-									<p
-										style='height: 1.5rem;white-space: nowrap;overflow: hidden;text-overflow: ellipsis'
-									>{{volumeInfo.authors}}</p>
-									<div class='buttons'>
-										<a href='/books/{{id}}' class='button is-warning modal-button'>Details</a>
-										<a class='button is-info js-modal-trigger' data-target='addToCollection'>Add to Collection</a>
-									</div>
+	<section class='container'>
+		<div class='columns features is-flex is-flex-wrap-wrap'>
+			{{#each books}}
+				<div class='column is-3 modal-button' data-target='modal-card'>
+					<div class='card is-shady'>
+						<div class='card-image'>
+							<figure class='image is-4by5'>
+								<img src='{{volumeInfo.imageLinks.thumbnail}}' alt='{{volumeInfo.title}}' />
+							</figure>
+						</div>
+						<div class='card-content'>
+							<div class='content'>
+								<h4
+									style='height: 1.5rem;white-space: nowrap;overflow: hidden;text-overflow: ellipsis '
+								>{{volumeInfo.title}}</h4>
+								<p
+									style='height: 1.5rem;white-space: nowrap;overflow: hidden;text-overflow: ellipsis'
+								>{{volumeInfo.authors}}</p>
+								<div class='buttons'>
+									<a href='/books/{{id}}' class='button is-warning modal-button'>Details</a>
+									<a
+										class='button is-info js-modal-trigger'
+										data-target='addToCollection'
+										data-book-id='{{id}}'
+										onclick='event.preventDefault(); setBookId("{{id}}");'
+									>
+										Add to Collection
+									</a>
 								</div>
 							</div>
 						</div>
 					</div>
-				{{/each}}
-			</div>
-		</section>
-	{{/if}}
-</div>
+				</div>
+			{{/each}}
+		</div>
+	</section>
+{{/if}}
 
 <form action='/books/add' method='POST'>
+	<input type='hidden' name='bookId' id='bookId' value='' />
 	<div class='modal' id='addToCollection'>
 		<div class='modal-background'></div>
 		<div class='modal-content'>
@@ -63,6 +69,7 @@
 				<section class='modal-card-body is-flex is-justify-content-center' style='min-height: 30vh;'>
 					<div class='field'>
 						<div class='select is-medium'>
+							{{! Select which collection to add book to }}
 							<select name='name'>
 								<option hidden> Your Collections</option>
 								{{#each userData.collections}}
@@ -81,6 +88,7 @@
 		</div>
 	</div>
 </form>
+
 <form action='/collections/create' method='POST'>
 	<div class='modal' id='createCollection'>
 		<div class='modal-background'></div>
@@ -109,3 +117,7 @@
 		</div>
 	</div>
 </form>
+
+<script>
+	function setBookId(bookId) { document.getElementById('bookId').value = bookId; }
+</script>

@@ -49,7 +49,7 @@ router
 router
 	.route('/add')
 	.get((req, res) => {})
-	.post(isLoggedIn, async (req, res) => {
+	.post(async (req, res) => {
 		try {
 			const { name, bookId } = req.body;
 			const currentUser = req.session.currentUser.username;
@@ -92,7 +92,7 @@ router
 router
 	.route('/:bookId/add')
 	.get((req, res) => {})
-	.post(isLoggedIn, async (req, res) => {
+	.post(async (req, res) => {
 		const { name } = req.body;
 		const currentUser = req.session.currentUser.username;
 		const response = await axios.get(`https://www.googleapis.com/books/v1/volumes/${req.params.bookId}`, {
@@ -112,16 +112,16 @@ router
 
 router.post('/:bookId/delete', (req, res, next) => {
 	const { bookId } = req.params;
-	const {referer} = req.headers;
+	const { referer } = req.headers;
 	const lastSlashIndex = referer.lastIndexOf('/');
 	const collectionId = referer.substring(lastSlashIndex + 1);
 	Collection.findByIdAndUpdate(collectionId, { $pull: { books: bookId } })
-	.then(() => {
-		res.redirect(`/collections/${collectionId}`);
-	})
-	.catch((err) => {
-		console.log(err);
-		next(err);
+		.then(() => {
+			res.redirect(`/collections/${collectionId}`);
+		})
+		.catch((err) => {
+			console.log(err);
+			next(err);
 		});
 });
 

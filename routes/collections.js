@@ -30,35 +30,37 @@ router
 	});
 
 router.get('/:collectionsId', (req, res) => {
-    let verificationObject = {};
-    const { currentUser } = req.session;
-    const { collectionsId } = req.params;
-    
-    Collection.findById(collectionsId)
-        .populate('books')
-        .then(collection => {
-            const user = collection.user;
-            return User.findById(user).then(person => {
-                if (person.username === currentUser.username) {
-                    verificationObject.property = 'Verified!';
-                }
-                
-                return Promise.all(collection.books.map(book => {
-                    return axios.get(`https://www.googleapis.com/books/v1/volumes/${book}`, {
-                        headers: {
-                            'Referrer-Policy': 'no-referrer-when-downgrade',
-                        },
-                    })
-                    .then(response => response.data);
-                }))
-                .then(bookData => {
-                    res.render('collection', { collection, books: bookData, verificationObject });
-                });
-            });
-        })
-        .catch(error => {
-            console.error(error);
-        });
+	let verificationObject = {};
+	const { currentUser } = req.session;
+	const { collectionsId } = req.params;
+
+	Collection.findById(collectionsId)
+		.populate('books')
+		.then((collection) => {
+			const user = collection.user;
+			return User.findById(user).then((person) => {
+				if (person.username === currentUser.username) {
+					verificationObject.property = 'Verified!';
+				}
+
+				return Promise.all(
+					collection.books.map((book) => {
+						return axios
+							.get(`http://openlibrary.org/search.json?q=${book}`, {
+								headers: {
+									'Referrer-Policy': 'no-referrer-when-downgrade',
+								},
+							})
+							.then((response) => response.data);
+					}),
+				).then((bookData) => {
+					res.render('collection', { collection, books: bookData, verificationObject });
+				});
+			});
+		})
+		.catch((error) => {
+			console.error(error);
+		});
 });
 
 router.post('/:collectionsId/edit', (req, res, next) => {

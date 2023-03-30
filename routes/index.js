@@ -9,50 +9,10 @@ router
 		if (req.session.currentUser) {
 			const currentUser = req.session.currentUser.username;
 			const userData = await User.findOne({ currentUser }).populate('collections');
-			const collections = userData.collections;
-			const bookData = collections
-				.map((collection) => {
-					const books = collection.books.map((book) => {
-						return book;
-					});
-					return books;
-				})
-				.flat();
-			const queries = getRandomQueries(4);
-			const promises = queries.map(async (query) => {
-				const response = await axios.get(
-					`https://www.googleapis.com/books/v1/volumes?q=${query}&filter=partial&startIndex=${randomNumber}&maxResults=1&key=${process.env.KEY}`,
-					{
-						headers: {
-							'Referrer-Policy': 'no-referrer-when-downgrade',
-						},
-					},
-				);
-				const book = response.data.items[0];
-				if (book) {
-					return book;
-				}
-			});
-			const books = await Promise.all(promises);
-			res.render('index', { books, userData, bookData });
+
+			res.render('index', { userData });
 		} else {
-			const queries = getRandomQueries(4);
-			const promises = queries.map(async (query) => {
-				const response = await axios.get(
-					`https://www.googleapis.com/books/v1/volumes?q=${query}&filter=partial&startIndex=${randomNumber}&maxResults=1&key=${process.env.KEY}`,
-					{
-						headers: {
-							'Referrer-Policy': 'no-referrer-when-downgrade',
-						},
-					},
-				);
-				const book = response.data.items[0];
-				if (book) {
-					return book;
-				}
-			});
-			const books = await Promise.all(promises);
-			res.render('index', { books });
+			res.render('index', { userData });
 		}
 	})
 	.post((req, res) => {});

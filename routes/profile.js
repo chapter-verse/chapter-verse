@@ -36,7 +36,6 @@ router.get('/:username', (req, res) => {
 });
 
 router.post('/:userId/edit', (req, res, next) => {
-	console.log(req);
 	const { userId } = req.params;
 	const { username, description, birthday } = req.body;
 	
@@ -61,6 +60,26 @@ router.post('/:userId/edit-avatar',fileUploader.single('avatar'), (req, res, nex
 			console.log(err);
 			next(err);
 		});
+});
+
+router.post('/:userId/follow', (req, res, next) => {
+	const { userId } = req.params;
+	const currentUserId = req.session.currentUser._id;
+	const {referer} = req.headers;
+	const lastSlashIndex = referer.lastIndexOf('/');
+	const username = referer.substring(lastSlashIndex + 1);
+	User.findById(userId)
+	.then((follow)=> {
+		console.log(follow._id)
+	return User.findByIdAndUpdate(currentUserId, { $addToSet: { follows: follow._id } }, { new: true });
+	})
+	.then(() => {
+		res.redirect(`/profile/${username}`);
+	})
+	.catch((err) => {
+		console.log(err);
+		next(err);
+	});
 });
 
 module.exports = router;

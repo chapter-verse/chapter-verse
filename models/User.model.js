@@ -38,6 +38,18 @@ const userSchema = new Schema(
 				ref: 'Collection',
 			},
 		],
+		favourites: [
+			{
+				type: Schema.Types.ObjectId,
+				ref: 'Collection',
+			},
+		],
+		follows: [
+			{
+				type: Schema.Types.ObjectId,
+				ref: 'User',
+			},
+		],
 		imageUrl: {
 			type: String,
 			default: 'https://res.cloudinary.com/dsbfbwbvq/image/upload/v1680051413/Chapter-Verse/Avatar_01_scbhma.jpg'

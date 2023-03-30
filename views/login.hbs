@@ -56,41 +56,11 @@
 		<div class='column is-flex is-justify-content-center has-text-centered is-size-5'>
 			<div class='field'>
 				<p class='white'>Dont have an account?</p>
-				<a href='/register'>Register</a>
+				<a class='is-size-4' href='/register'>Register</a>
 			</div>
 		</div>
 
 	</div>
 
 </form>
-<div class='columns is-flex is-flex-direction-column is-align-items-center my-6'>
-
-	<div class='column is-4 is-flex is-justify-content-center'>
-		<div
-			id='g_id_onload'
-			data-client_id='664560957233-qoi9j435d0dt957e2lr343b3bajl1ueq.apps.googleusercontent.com'
-			data-login_uri='https://localhost:3000/login'
-			data-auto_prompt='false'
-		>
-		</div>
-		<div
-			class='g_id_signin'
-			data-type='standard'
-			data-size='large'
-			data-theme='outline'
-			data-text='sign_in_with'
-			data-shape='rectangular'
-			data-logo_alignment='left'
-		>
-		</div>
-	</div>
-</div>
-
-<script>
-	function handleCredentialResponse(response) { console.log("Encoded JWT ID token: " + response.credential); }
-	window.onload = function () { google.accounts.id.initialize({ client_id:
-	"664560957233-qoi9j435d0dt957e2lr343b3bajl1ueq.apps.googleusercontent.com", callback: handleCredentialResponse })};
-	google.accounts.id.renderButton( document.getElementById("buttonDiv"), { theme: "outline", size: "large" } //
-	customization attributes ); google.accounts.id.prompt(); // also display the One Tap dialog }
-</script>
 <div id='buttonDiv'></div>

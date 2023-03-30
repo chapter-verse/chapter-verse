@@ -18,41 +18,41 @@ router
 					return books;
 				})
 				.flat();
-			const queries = getRandomQueries(4);
-			const promises = queries.map(async (query) => {
-				const response = await axios.get(
-					`https://www.googleapis.com/books/v1/volumes?q=${query}&filter=partial&startIndex=${randomNumber}&maxResults=1&key=${process.env.KEY}`,
-					{
-						headers: {
-							'Referrer-Policy': 'no-referrer-when-downgrade',
-						},
-					},
-				);
-				const book = response.data.items[0];
-				if (book) {
-					return book;
-				}
-			});
-			const books = await Promise.all(promises);
-			res.render('index', { books, userData, bookData });
+			// const queries = getRandomQueries(4);
+			// const promises = queries.map(async (query) => {
+			// 	const response = await axios.get(
+			// 		`https://www.googleapis.com/books/v1/volumes?q=${query}&filter=partial&startIndex=${randomNumber}&maxResults=1&key=${process.env.KEY}`,
+			// 		{
+			// 			headers: {
+			// 				'Referrer-Policy': 'no-referrer-when-downgrade',
+			// 			},
+			// 		},
+			// 	);
+			// 	const book = response.data.items[0];
+			// 	if (book) {
+			// 		return book;
+			// 	}
+			// });
+			// const books = await Promise.all(promises);
+			res.render('index', { userData });
 		} else {
-			const queries = getRandomQueries(4);
-			const promises = queries.map(async (query) => {
-				const response = await axios.get(
-					`https://www.googleapis.com/books/v1/volumes?q=${query}&filter=partial&startIndex=${randomNumber}&maxResults=1&key=${process.env.KEY}`,
-					{
-						headers: {
-							'Referrer-Policy': 'no-referrer-when-downgrade',
-						},
-					},
-				);
-				const book = response.data.items[0];
-				if (book) {
-					return book;
-				}
-			});
-			const books = await Promise.all(promises);
-			res.render('index', { books });
+			// const queries = getRandomQueries(4);
+			// const promises = queries.map(async (query) => {
+			// 	const response = await axios.get(
+			// 		`https://www.googleapis.com/books/v1/volumes?q=${query}&filter=partial&startIndex=${randomNumber}&maxResults=1&key=${process.env.KEY}`,
+			// 		{
+			// 			headers: {
+			// 				'Referrer-Policy': 'no-referrer-when-downgrade',
+			// 			},
+			// 		},
+			// 	);
+			// 	const book = response.data.items[0];
+			// 	if (book) {
+			// 		return book;
+			// 	}
+			// });
+			// const books = await Promise.all(promises);
+			res.render('index', {});
 		}
 	})
 	.post((req, res) => {});

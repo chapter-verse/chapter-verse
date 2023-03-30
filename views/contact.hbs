@@ -1,0 +1,42 @@
+<div class='is-flex is-justify-content-center'>
+
+	<div class='container my-5 mt-5 mx-5 px-5 column is-4'>
+		<div class='is-flex is-justify-content-center'>
+			<h2 class='subtitle is-2 is-capitalized white'>Contact Us</h2>
+		</div>
+		<form action='/contact' method='POST'>
+			<div class='field'>
+				<label for='name' class='label is-size-4 has-text-weight-light'></label>
+				<div class='control has-icons-left'>
+					<input type='text' name='name' id='name' class='input is-medium' placeholder='Name' autofocus />
+					<span class='icon is-left'>
+						<i class='fa fa-user'></i>
+					</span>
+				</div>
+			</div>
+			<div class='field'>
+				<label for='email' class='label is-size-4 has-text-weight-light'></label>
+				<div class='control has-icons-left'>
+					<input type='email' name='email' id='email' class='input is-medium' placeholder='Email' />
+					<span class='icon is-left'>
+						<i class='fa fa-envelope'></i>
+					</span>
+				</div>
+			</div>
+			<div class='field'>
+				<label for='message' class='label is-size-4 has-text-weight-light'></label>
+				<textarea
+					name='message'
+					id='message'
+					rows='5'
+					class='textarea is-medium has-fixed-size'
+					placeholder='Message'
+				></textarea>
+			</div>
+			<div class='buttons is-flex is-justify-content-center'><button
+					type='submit'
+					class='button is-success is-size-5 px-4'
+				>Submit</button></div>
+		</form>
+	</div>
+</div>

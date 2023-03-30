@@ -8,10 +8,10 @@ const hbs = require('hbs');
 
 const app = express();
 
-app.set("views", __dirname + "/views");
-app.set("view engine", "hbs");
+app.set('views', __dirname + '/views');
+app.set('view engine', 'hbs');
 
-hbs.registerPartials(__dirname + "/views/partials/");
+hbs.registerPartials(__dirname + '/views/partials/');
 
 require('./config/session-config')(app);
 require('./config')(app);
@@ -34,6 +34,10 @@ app.use('/logout', require('./routes/logout'));
 app.use('/books', require('./routes/books'));
 
 app.use('/collections', require('./routes/collections'));
+
+app.use('/about', require('./routes/about'));
+
+app.use('/contact', require('./routes/contact'));
 
 require('./error-handling')(app);
 

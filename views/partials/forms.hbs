@@ -1,0 +1,255 @@
+{{!----------}}
+{{!-- USER --}}
+{{!----------}}
+
+{{!-- EDIT --}}
+
+<form action='/profile/{{session.currentUser._id}}/edit' method='post'>
+	<div class='modal' id='profileModal'>
+		<div class='modal-background'></div>
+		<div class='modal-card'>
+			<header class='modal-card-head'>
+				<p class='modal-card-title'>Edit profile</p>
+			</header>
+			<section class='modal-card-body'>
+				<div class='control'>
+					<label class='label'>Username</label>
+					<p class='control has-icon has-icon-right'>
+						<input class='input' placeholder='Username' type='text' name='username' value='{{data.username}}' />
+					</p>
+				</div>
+				<div class='control'>
+					<div class='control-label is-pulled-left'>
+						<label class='label'>Date of Birth </label>
+					</div>
+					<span>
+						<span class='select'>
+							<input type='date' class='input' name='birthday' value='{{data.birthday}}' />
+						</span>
+					</span>
+				</div>
+				<div class='control'>
+					<label class='label'>Description</label>
+					<p class='control'>
+						<textarea class='textarea' placeholder='Describe Yourself!' name='description'>{{data.description}}</textarea>
+					</p>
+				</div>
+			</section>
+			<footer class='modal-card-foot'>
+				<button class='button is-primary modal-save'>Save changes</button>
+				<span class='button update-modal-close'>Cancel</span>
+			</footer>
+		</div>
+	</div>
+</form>
+
+{{!-- EDIT AVATAR --}}
+
+<form action='/profile/{{session.currentUser._id}}/edit-avatar' method='post' enctype='multipart/form-data'>
+	<div class='modal' id='avatarModal'>
+		<div class='modal-background'></div>
+		<div class='modal-card'>
+			<header class='modal-card-head'>
+				<p class='modal-card-title'>Edit avatar</p>
+			</header>
+			<section class='modal-card-body'>
+				<div class='control'>
+					<label class='label'>Avatars :</label>
+				</div>
+				<div class='control'>
+					<label class='label'>Or add yours</label>
+					<input type='file' name='avatar' class='input' />
+				</div>
+			</section>
+			<footer class='modal-card-foot'>
+				<button class='button is-primary modal-save'>Save changes</button>
+				<span class='button update-modal-close'>Cancel</span>
+			</footer>
+		</div>
+	</div>
+</form>
+
+{{!-----------------}}
+{{!-- COLLECTIONS --}}
+{{!-----------------}}
+
+{{!-- CREATE --}}
+
+<form action='/collections/create' method='POST'>
+    <div class='modal' id='createCollection'>
+        <div class='modal-background'></div>
+        <div class='modal-content'>
+            <div class='modal-background'></div>
+            <div class='modal-card'>
+                <header class='modal-card-head'>
+                    <p class='modal-card-title'>Add to Collection</p>
+                    <span class='delete update-modal-close' aria-label='close'></span>
+                </header>
+                <section class='modal-card-body'>
+                    <div class='field'>
+                        <label class='label'>Collection Name</label>
+                        <input type='text' id='update-text' name='name' class='input is-medium' value='' />
+                    </div>
+                    <div class='field'>
+                        <label class='label'>Description</label>
+                        <textarea class='textarea has-fixed-size is-medium' name='description'></textarea>
+                    </div>
+                </section>
+                <footer class='modal-card-foot'>
+                    <button id='save' class='button is-success is-medium' type='submit'>Create</button>
+                    <span class='button update-modal-close js-modal-trigger is-medium' data-target='addToCollection'>Cancel</span>
+                </footer>
+            </div>
+        </div>
+    </div>
+</form>
+
+{{!-- EDIT --}}
+
+<form action='/collections/{{this._id}}/edit' method='POST'>
+	<div class='modal' id='editCollection'>
+		<div class='modal-background'></div>
+		<div class='modal-content'>
+			<div class='modal-background'></div>
+			<div class='modal-card'>
+				<header class='modal-card-head'>
+					<p class='modal-card-title'>Edit Collection</p>
+					<span class='delete update-modal-close' aria-label='close'></span>
+				</header>
+				<section class='modal-card-body'>
+					<div class='field'>
+						<label class='label'>Collection Name</label>
+						<input type='text' id='update-text' name='name' class='input' value='{{name}}' />
+					</div>
+					<div class='field'>
+						<label class='label'>Description</label>
+						<textarea class='textarea has-fixed-size' name='description'>{{description}}</textarea>
+					</div>
+				</section>
+				<footer class='modal-card-foot'>
+					<button id='save' class='button is-success' type='submit'>Save changes</button>
+					<span class='button update-modal-close'>Cancel</span>
+				</footer>
+			</div>
+		</div>
+	</div>
+</form>
+
+{{!-- EDIT COVER --}}
+
+<form action='/collections/{{this._id}}/edit-cover' method='post' enctype='multipart/form-data'>
+	<div class='modal' id='coverModal'>
+		<div class='modal-background'></div>
+		<div class='modal-card'>
+
+			<header class='modal-card-head'>
+				<p class='modal-card-title'>Edit collection cover</p>
+			</header>
+			<section class='modal-card-body'>
+                    <div class='control'>
+                        <label class='label'>Image format must be jpg or png</label>
+					<input type='file' name='cover' class='input' />
+				</div>
+			</section>
+			<footer class='modal-card-foot'>
+				<button class='button is-primary modal-save'>Save changes</button>
+				<span class='button update-modal-close'>Cancel</span>
+			</footer>
+		</div>
+	</div>
+</form>
+
+{{!-- DELETE --}}
+
+<form action='/collections/{{this._id}}/delete' method='POST'>
+	<div class='modal' id='deleteCollection'>
+		<div class='modal-background'></div>
+		<div class='modal-content'>
+			<div class='modal-background'></div>
+			<div class='modal-card'>
+				<header class='modal-card-head'>
+					<p class='modal-card-title'>Delete Collection</p>
+					<span class='delete update-modal-close' aria-label='close'></span>
+				</header>
+				<section class='modal-card-body'>
+					<div class='field'>
+						<label class='label'>
+							Are you sure you want to delete
+							{{name}}
+						</label>
+					</div>
+				</section>
+				<footer class='modal-card-foot'>
+					<button id='save' class='button is-success' type='submit'>Delete</button>
+					<span class='button update-modal-close'>Cancel</span>
+				</footer>
+			</div>
+		</div>
+	</div>
+</form>
+
+{{!-----------}}
+{{!-- BOOKS --}}
+{{!-----------}}
+
+{{!-- ADD TO COLLECTION --}}
+
+{{!-- <form action="/books/{{book.id}}/add" method="POST">
+   <div class="modal" id="addToCollection">
+      <div class="modal-background"></div>
+      <div class="modal-content">
+         <div class="modal-background"></div>
+         <div class="modal-card">
+            <header class="modal-card-head">
+               <p class="modal-card-title">Add to Collection</p>
+               <span class="delete update-modal-close" aria-label="close"></span>
+            </header>
+            <section class="modal-card-body is-flex is-justify-content-center" style="min-height: 30vh;">
+               <div class="field">
+                  <div class="select is-medium">
+                     <select name="name">
+                        <option hidden> Your Collections</option>
+                        {{#each userData.collections}}
+                          <option value="{{name}}">{{name}}</option>
+                        {{/each}}
+                     </select>
+                  </div>
+               </div>
+            </section>
+            <footer class="modal-card-foot is-flex is-justify-content-center">
+               <button id="save" class="button is-success is-medium" type="submit">Save changes</button>
+               <span class="button update-modal-close is-medium">Cancel</span>
+               <a class="button is-info  js-modal-trigger is-medium" data-target="createCollection">Create a Collection</a>
+            </footer>
+         </div>
+      </div>
+   </div>
+</form> --}}
+
+{{!-- DELETE FROM COLLECTION --}}
+
+<form action='/books/{{id}}/delete' method='POST'>
+    <div class='modal' id='deleteBookForm-{{id}}'>
+        <div class='modal-background'></div>
+        <div class='modal-content'>
+            <div class='modal-background'></div>
+            <div class='modal-card'>
+                <header class='modal-card-head'>
+                    <p class='modal-card-title'>Delete book from collection</p>
+                    <span class='delete update-modal-close' aria-label='close'></span>
+                </header>
+                <section class='modal-card-body'>
+                    <div class='field'>
+                        <label class='label'>
+                            Are you sure you want to delete {{volumeInfo.title}}
+                        </label>
+                    </div>
+                </section>
+                <footer class='modal-card-foot'>
+                    <button id='save' class='button is-success' type='submit'>Delete</button>
+                    <span class='button update-modal-close'>Cancel</span>
+                </footer>
+            </div>
+        </div>
+    </div>
+</form>

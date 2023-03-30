@@ -60,17 +60,17 @@
 					<li class='link'>
 						<a>
 							<span class='icon'>
-								<i class='fa fa-book'></i>
+								<i class="fa fa-heart"></i>
 							</span>
-							<span>My Books</span>
+							<span>Favourites</span>
 						</a>
 					</li>
 					<li class='link'>
 						<a>
 							<span class='icon'>
-								<i class='fa fa-comment'></i>
+								<i class="fa fa-light fa-user"></i>
 							</span>
-							<span>My Reviews</span>
+							<span>Follows</span>
 						</a>
 					</li>
 				</ul>
@@ -92,7 +92,7 @@
 							<button class='button is-info is-light is-medium mr-3'>Search</button>
 						</div>
 					</div>
-					<a class='button is-success is-light is-medium js-modal-trigger' data-target='addToCollection'>Create a Collection</a>
+					<a class='button is-success is-light is-medium js-modal-trigger' data-target='createCollection'>Create a Collection</a>
 				</div>
 			</div>
 		</div>
@@ -148,7 +148,6 @@
 						</div>
 					</div>
 				</form>
-
 				<form action='/collections/{{this._id}}/delete' method='POST'>
 					<div class='modal' id='deleteCollectionForm-{{this._id}}'>
 						<div class='modal-background'></div>
@@ -181,94 +180,4 @@
 	</div>
 </div>
 
-<form action='/collections/create' method='POST'>
-	<div class='modal' id='addToCollection'>
-		<div class='modal-background'></div>
-		<div class='modal-content'>
-			<div class='modal-background'></div>
-			<div class='modal-card'>
-				<header class='modal-card-head'>
-					<p class='modal-card-title'>Create collection</p>
-					<span class='delete update-modal-close' aria-label='close'></span>
-				</header>
-				<section class='modal-card-body'>
-					<div class='field'>
-						<label class='label'>Collection name</label>
-						<input type='text' id='update-text' name='name' class='input' />
-					</div>
-					<div class='field'>
-						<label class='label'>Description</label>
-						<textarea class='textarea has-fixed-size' name='description'></textarea>
-					</div>
-				</section>
-				<footer class='modal-card-foot'>
-					<button id='save' class='button is-success' type='submit'>Create</button>
-					<span class='button update-modal-close'>Cancel</span>
-				</footer>
-			</div>
-		</div>
-	</div>
-</form>
-
-<form action='/profile/{{session.currentUser._id}}/edit' method='post'>
-	<div class='modal' id='profileModal'>
-		<div class='modal-background'></div>
-		<div class='modal-card'>
-			<header class='modal-card-head'>
-				<p class='modal-card-title'>Edit profile</p>
-			</header>
-			<section class='modal-card-body'>
-				<div class='control'>
-					<label class='label'>Username</label>
-					<p class='control has-icon has-icon-right'>
-						<input class='input' placeholder='Username' type='text' name='username' value='{{data.username}}' />
-					</p>
-				</div>
-				<div class='control'>
-					<div class='control-label is-pulled-left'>
-						<label class='label'>Date of Birth </label>
-					</div>
-					<span>
-						<span class='select'>
-							<input type='date' class='input' name='birthday' value='{{data.birthday}}' />
-						</span>
-					</span>
-				</div>
-				<div class='control'>
-					<label class='label'>Description</label>
-					<p class='control'>
-						<textarea class='textarea' placeholder='Describe Yourself!' name='description'>{{data.description}}</textarea>
-					</p>
-				</div>
-			</section>
-			<footer class='modal-card-foot'>
-				<button class='button is-primary modal-save'>Save changes</button>
-				<span class='button update-modal-close'>Cancel</span>
-			</footer>
-		</div>
-	</div>
-</form>
-
-<form action='/profile/{{session.currentUser._id}}/edit-avatar' method='post' enctype='multipart/form-data'>
-	<div class='modal' id='avatarModal'>
-		<div class='modal-background'></div>
-		<div class='modal-card'>
-			<header class='modal-card-head'>
-				<p class='modal-card-title'>Edit avatar</p>
-			</header>
-			<section class='modal-card-body'>
-				<div class='control'>
-					<label class='label'>Avatars :</label>
-				</div>
-				<div class='control'>
-					<label class='label'>Or add yours</label>
-					<input type='file' name='avatar' class='input' />
-				</div>
-			</section>
-			<footer class='modal-card-foot'>
-				<button class='button is-primary modal-save'>Save changes</button>
-				<span class='button update-modal-close'>Cancel</span>
-			</footer>
-		</div>
-	</div>
-</form>
+{{> forms }}

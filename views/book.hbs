@@ -10,8 +10,10 @@
                   <br>
                   <br>
                   <a class="button is-danger is-light" href="javascript:history.back()" class="button">Back</a>
+                  {{#if session.currentUser}}
                   <a class="button is-info is-light js-modal-trigger" data-target="addToCollection">Add to Collection</a>
                   <a class="button is-success is-light">Add to Favourites</a>
+                  {{/if}}
 					</div>
 					<div class="column is-two-third is-full-mobile featured-content va">
 						<div>
@@ -61,31 +63,5 @@
       </div>
    </div>
 </form>
-<form action='/collections/create' method='POST'>
-	<div class='modal' id='createCollection'>
-		<div class='modal-background'></div>
-		<div class='modal-content'>
-			<div class='modal-background'></div>
-			<div class='modal-card'>
-				<header class='modal-card-head'>
-					<p class='modal-card-title'>Add to Collection</p>
-					<span class='delete update-modal-close' aria-label='close'></span>
-				</header>
-				<section class='modal-card-body'>
-					<div class='field'>
-						<label class='label'>Collection Name</label>
-						<input type='text' id='update-text' name='name' class='input  is-medium' value='' />
-					</div>
-					<div class='field'>
-						<label class='label'>Description</label>
-						<textarea class='textarea has-fixed-size is-medium' name='description'></textarea>
-					</div>
-				</section>
-				<footer class='modal-card-foot'>
-					<button id='save' class='button is-success  is-medium' type='submit'>Save changes</button>
-					<span class='button update-modal-close js-modal-trigger is-medium' data-target="addToCollection">Cancel</span>
-				</footer>
-			</div>
-		</div>
-	</div>
-</form>
+
+{{> forms }}

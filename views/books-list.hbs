@@ -89,34 +89,7 @@
 	</div>
 </form>
 
-<form action='/collections/create' method='POST'>
-	<div class='modal' id='createCollection'>
-		<div class='modal-background'></div>
-		<div class='modal-content'>
-			<div class='modal-background'></div>
-			<div class='modal-card'>
-				<header class='modal-card-head'>
-					<p class='modal-card-title'>Add to Collection</p>
-					<span class='delete update-modal-close' aria-label='close'></span>
-				</header>
-				<section class='modal-card-body'>
-					<div class='field'>
-						<label class='label'>Collection Name</label>
-						<input type='text' id='update-text' name='name' class='input is-medium' value='' />
-					</div>
-					<div class='field'>
-						<label class='label'>Description</label>
-						<textarea class='textarea has-fixed-size is-medium' name='description'></textarea>
-					</div>
-				</section>
-				<footer class='modal-card-foot'>
-					<button id='save' class='button is-success is-medium' type='submit'>Save changes</button>
-					<span class='button update-modal-close js-modal-trigger is-medium' data-target='addToCollection'>Cancel</span>
-				</footer>
-			</div>
-		</div>
-	</div>
-</form>
+{{> forms }}
 
 <script>
 	function setBookId(bookId) { document.getElementById('bookId').value = bookId; }

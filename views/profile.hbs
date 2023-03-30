@@ -19,7 +19,11 @@
 					<p class='tagline'>
 						{{data.description}}
 					</p>
-					
+					{{!-- {{#if session.currentUser}} --}}
+					<form action='/profile/{{data._id}}/follow' method='POST' style='margin:0;'>
+						<button class='button is-light mt-4 px-6 is-small'>follow</button>
+					</form>
+					{{!-- {{/if}} --}}
 				</div>
 				<div class='column is-2-tablet is-4-mobile has-text-centered'>
 					<p class='stat-val'>{{data.collections.length}}</p>
@@ -114,3 +118,7 @@
 		</div>
 	</div>
 </div>
+
+{{#if session.currentUser}}
+{{> forms }}
+{{/if}}

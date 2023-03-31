@@ -74,26 +74,6 @@
 				</li>
 			</ul>
 		</div>
-		<div class='box' style='border-radius: 0px;'>
-			<div class='columns'>
-
-				<div class='column is-flex is-justify-content-center'>
-					<div class='field has-addons'>
-						<div class='control'>
-							<p class='control has-icons-left has-icons-right'>
-								<input class='input is-medium' placeholder='Search collections' type='text' />
-								<span class='icon is-small is-left'>
-									<i class='fas fa-search'></i>
-								</span>
-							</p>
-						</div>
-						<div class='control'>
-							<button class='button is-info is-medium mr-3'>Search</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 		<div class="content-tab" id="collection">
 			<div class='columns is-mobile is-flex is-flex-wrap-wrap'>
 				{{#each data.collections}}
@@ -122,12 +102,12 @@
 				{{/each}}
 			</div>
 		</div>
-		<div class="content-tab" id="books">
+		<div class="content-tab" id="books" style="display:none">
 			<div class='columns tab-pane is-mobile is-flex is-flex-wrap-wrap'>
 			
 			</div>
 		</div>
-		<div class="content-tab" id="follows">
+		<div class="content-tab" id="follows" style="display:none">
 			<div class='columns tab-pane is-mobile is-flex is-flex-wrap-wrap'>
 				{{#each data.follows}}
 					<div class='column is-3-tablet is-6-mobile mx-auto'>

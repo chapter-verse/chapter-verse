@@ -94,3 +94,11 @@ a {
 	border-radius: 2rem;
 	box-shadow: 0px 0px 5px black;
 }
+
+#home {
+	height: 90vh;
+	background-image: url(https://res.cloudinary.com/dsbfbwbvq/image/upload/v1680227503/AdobeStock_571697053_xrgcbm.png);
+	background-position: left;
+	background-size: cover;
+	position: relative;
+}

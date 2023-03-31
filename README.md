@@ -24,11 +24,11 @@ Clone the repository <br>
 Install dependencies <br>
 Put the following enviromental variables in your .env file: <br> 
 * PORT=3000 
-* SECRET='The Secret Code of Doom' 
-* KEY = "AIzaSyCsxGfy_6EBINg7T6X3fiWUnFaaMXP8PIM" 
-* CLOUDINARY_NAME=dsbfbwbvq 
-* CLOUDINARY_KEY=345677351743948 
-* CLOUDINARY_SECRET=byqf3Czryv8gwLy6tyqeqXkbfXg 
+* SECRET= Your Secret
+* KEY = Your Google Api Key 
+* CLOUDINARY_NAME= Your Cloudinary Name
+* CLOUDINARY_KEY= Your Cloudinary Key
+* CLOUDINARY_SECRET= Your Cloudinary Secret 
 
 
 ## Usage

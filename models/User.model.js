@@ -38,7 +38,10 @@ const userSchema = new Schema(
 				ref: 'Collection',
 			},
 		],
-		favourites: [
+		favourites: {
+			type: [String],
+		},
+		favouritesCollection: [
 			{
 				type: Schema.Types.ObjectId,
 				ref: 'Collection',

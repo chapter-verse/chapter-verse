@@ -7,6 +7,18 @@ const axios = require('axios');
 const fileUploader = require('../config/cloudinary.config');
 const { collection } = require('../models/User.model');
 
+router.get('/collection-list', (req, res, next) => {
+	Collection.find()
+    .populate('user')
+	.then((data)=> {
+		res.render('collection-list', {data: data});
+	})
+	.catch((err) => {
+		console.log(err);
+		next(err);
+	});
+});
+
 router
 	.route('/create')
 	.get((req, res) => {})

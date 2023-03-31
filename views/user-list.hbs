@@ -1,0 +1,33 @@
+<section class="hero">
+	<div class="hero-body">
+        <section class='container'>
+            <div class='columns features is-flex is-flex-wrap-wrap'>
+                {{#each data}}
+                    <div class='column is-3 modal-button' data-target='modal-card'>
+                        <div class='card is-shady'>
+                            <div class='card-image'>
+                                <figure class='image is-1by1'>
+                                    <img src='{{imageUrl}}' alt='{{username}}' />
+                                </figure>
+                            </div>
+                            <div class='card-content'>
+                                <div class='content'>
+                                    <h4
+                                        style='height: 1.5rem;white-space: nowrap;overflow: hidden;text-overflow: ellipsis '
+                                    >{{username}}</h4>
+                                    <p
+                                        style='height: 1.5rem;white-space: nowrap;overflow: hidden;text-overflow: ellipsis'
+                                    >{{description}}</p>
+                                    <div class='buttons'>
+                                        <a href='/profile/{{username}}' class='button is-warning modal-button'>See profile</a>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+        </section>
+    </div>
+</section>

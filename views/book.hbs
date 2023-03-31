@@ -11,8 +11,16 @@
                   <br>
                   <a class="button is-danger is-light" href="javascript:history.back()" class="button">Back</a>
                   {{#if session.currentUser}}
-                  <a class="button is-info is-light js-modal-trigger" data-target="addToCollection">Add to Collection</a>
-                  <a class="button is-success is-light">Add to Favourites</a>
+                      <a class="button is-info is-light js-modal-trigger" data-target="addToCollection">Add to Collection</a>
+                     {{#if favourite}}
+                        <form class='button p-0' action='/profile/{{book.id}}/unfavourite' method='POST' style='margin:0;'>
+                           <button class='button is-light is-danger'>Remove favourite</button>
+                        </form>
+                     {{else}}
+                        <form class='button p-0' action='/profile/{{book.id}}/favourite' method='POST' style='margin:0;'>
+                           <button class="button is-light is-danger">Add favourite</button>
+                        </form>
+                     {{/if}}
                   {{/if}}
 					</div>
 					<div class="column is-two-third is-full-mobile featured-content va">
@@ -63,5 +71,3 @@
       </div>
    </div>
 </form>
-
-{{> forms }}

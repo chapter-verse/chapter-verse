@@ -69,25 +69,59 @@ router
 		}
 	});
 
-router
-	.route('/:bookId')
-	.get(async (req, res) => {
-		const response = await axios.get(`https://www.googleapis.com/books/v1/volumes/${req.params.bookId}`, {
-			headers: {
-				'Referrer-Policy': 'no-referrer-when-downgrade',
-			},
-		});
+// router
+// 	.route('/:bookId')
+// 	.get(async (req, res) => {
+// 		const response = await axios.get(`https://www.googleapis.com/books/v1/volumes/${req.params.bookId}`, {
+// 			headers: {
+// 				'Referrer-Policy': 'no-referrer-when-downgrade',
+// 			},
+// 		});
+// 		if (req.session.currentUser) {
+// 			const currentUser = req.session.currentUser.username;
+// 			const userData = await User.findOne({ currentUser }).populate('collections');
+// 			const book = response.data;
+// 			res.render('book', { book, userData });
+// 		} else {
+// 			const book = response.data;
+// 			res.render('book', { book });
+// 		}
+// 	})
+// 	.post((req, res) => {});
+
+router.get('/:bookId', (req, res) => {
+	axios
+	  .get(`https://www.googleapis.com/books/v1/volumes/${req.params.bookId}`, {
+		headers: {
+		  'Referrer-Policy': 'no-referrer-when-downgrade',
+		},
+	  })
+	  .then((response) => {
 		if (req.session.currentUser) {
-			const currentUser = req.session.currentUser.username;
-			const userData = await User.findOne({ currentUser }).populate('collections');
+		  const {bookId} = req.params
+		  const currentUserId = req.session.currentUser._id;
+		  console.log(currentUserId)
+		  let favourite = false
+		  let favouritesArr
+		  User.findById(currentUserId)
+		  .populate('collections')
+		  .populate('favourites')
+		  .then((data) => {
+			favouritesArr = data.favourites;
+			if (favouritesArr.includes(bookId)) favourite = true ;
 			const book = response.data;
-			res.render('book', { book, userData });
+			res.render('book', { book, data, favourite});
+		  });
 		} else {
-			const book = response.data;
-			res.render('book', { book });
+		  const book = response.data;
+		  res.render('book', { book });
 		}
-	})
-	.post((req, res) => {});
+	  })
+	  .catch((error) => {
+		console.error(error);
+		res.status(500).send('An error occurred');
+	  });
+  });
 
 router
 	.route('/:bookId/add')

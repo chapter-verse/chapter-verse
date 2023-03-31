@@ -16,7 +16,7 @@
 						{{data.description}}
 					</p>
 					<a
-						class='button is-light mt-4 px-6 is-small js-modal-trigger'
+						class='button is-light mt-4 px-4 is-small js-modal-trigger'
 						data-target='profileModal'
 						id='edit-preferences'
 						style='margin: 5px 0'
@@ -24,7 +24,7 @@
 						Edit profile
 					</a>
 					<a
-						class='button is-light mt-4 px-6 is-small js-modal-trigger'
+						class='button is-light mt-4 px-4 is-small js-modal-trigger'
 						data-target='avatarModal'
 						id='edit-preferences'
 						style='margin: 5px 0'
@@ -32,151 +32,169 @@
 						Edit avatar
 					</a>
 				</div>
-				<div class='column is-2-tablet is-4-mobile has-text-centered'>
+				<div class='column is-1.5-tablet is-6-mobile has-text-centered'>
 					<p class='stat-val'>{{data.collections.length}}</p>
 					<p class='stat-key'>Collections</p>
 				</div>
-				<div class='column is-2-tablet is-4-mobile has-text-centered'>
+				<div class='column is-1.5-tablet is-6-mobile has-text-centered'>
 					<p class='stat-val'>{{booksNb}}</p>
 					<p class='stat-key'>Books</p>
 				</div>
-				<div class='column is-2-tablet is-4-mobile has-text-centered'>
-					<p class='stat-val'>0</p>
-					<p class='stat-key'>Reviews</p>
+				<div class='column is-1.5-tablet is-6-mobile has-text-centered'>
+					<p class='stat-val'>{{data.favourites.length}}</p>
+					<p class='stat-key'>Favourites</p>
+				</div>
+				<div class='column is-1.5-tablet is-6-mobile has-text-centered'>
+					<p class='stat-val'>{{data.follows.length}}</p>
+					<p class='stat-key'>Follows</p>
 				</div>
 			</div>
 		</div>
-		<div class='profile-options is-fullwidth'>
-			<div class='tabs is-fullwidth is-medium'>
-				<ul>
-					<li class='link is-active'>
-						<a>
-							<span class='icon'>
-								<i class='fa fa-list'></i>
-							</span>
-							<span>My Collections</span>
-						</a>
-					</li>
-					<li class='link'>
-						<a>
-							<span class='icon'>
-								<i class="fa fa-heart"></i>
-							</span>
-							<span>Favourites</span>
-						</a>
-					</li>
-					<li class='link'>
-						<a>
-							<span class='icon'>
-								<i class="fa fa-light fa-user"></i>
-							</span>
-							<span>Follows</span>
-						</a>
-					</li>
-				</ul>
-			</div>
+		<div class='tabs is-boxed is-fullwidth'>
+			<ul>
+				<li onclick="openTab(event,'collection')" class='tab link is-active'>
+					<a>
+						<span class='icon'>
+							<i class='fa fa-list'></i>
+						</span>
+						<span>My Collections</span>
+					</a>
+				</li>
+				<li onclick="openTab(event,'books')" class='tab link'>
+					<a>
+						<span class='icon'>
+							<i class="fa fa-heart"></i>
+						</span>
+						<span>Favourites</span>
+					</a>
+				</li>
+				<li onclick="openTab(event,'follows')" class='tab link'>
+					<a>
+						<span class='icon'>
+							<i class="fa fa-light fa-user"></i>
+						</span>
+						<span>Follows</span>
+					</a>
+				</li>
+			</ul>
 		</div>
-		<div class='box' style='border-radius: 0px;'>
-			<div class='columns'>
-				<div class='column is-flex is-justify-content-center'>
-					<div class='field has-addons'>
-						<div class='control'>
-							<p class='control has-icons-left has-icons-right'>
-								<input class='input is-medium' placeholder='Search your collections' type='text' />
-								<span class='icon is-small is-left'>
-									<i class='fas fa-search'></i>
-								</span>
-							</p>
-						</div>
-						<div class='control'>
-							<button class='button is-info is-light is-medium mr-3'>Search</button>
-						</div>
-					</div>
-					<a class='button is-success is-light is-medium js-modal-trigger' data-target='createCollection'>Create a Collection</a>
-				</div>
+		<div class="content-tab" id="collection" >
+			<div class='is-flex m-5 is-justify-content-center'>
+				<a 
+					class='button is-success is-light js-modal-trigger is-justify-content-center' 
+					data-target='createCollection'>Create a Collection
+				</a>
 			</div>
-		</div>
-		<div class='columns is-mobile is-flex is-flex-wrap-wrap'>
-			{{#each data.collections}}
-				{{log collections}}
-				<div class='column is-3-tablet is-6-mobile mx-auto'>
-					<div class='card'>
-						<div class='card-image'>
-							<figure class='image is-4by3'>
-								<img alt='' src='{{imageUrl}}' />
-							</figure>
-						</div>
-						<div class='card-content'>
-							<div class='content'>
-								<span class='tag is-dark subtitle'>Books: {{books.length}}</span>
-								<p class='title is-4'>{{name}}</p>
-								<p style='height: 1.5rem;white-space: nowrap; overflow: hidden;text-overflow: ellipsis'>{{description}}</p>
+			<div class='columns tab-pane is-mobile is-flex is-flex-wrap-wrap' >
+				{{#each data.collections}}
+					<div class='column is-3-tablet is-6-mobile mx-auto'>
+						<div class='card'>
+							<div class='card-image'>
+								<figure class='image is-4by3'>
+									<img alt='' src='{{imageUrl}}' />
+								</figure>
 							</div>
+							<div class='card-content'>
+								<div class='content'>
+									<span class='tag is-dark subtitle'>Books: {{books.length}}</span>
+									<p class='title is-4'>{{name}}</p>
+									<p style='height: 1.5rem;white-space: nowrap; overflow: hidden;text-overflow: ellipsis'>{{description}}</p>
+								</div>
+							</div>
+							<footer class='card-footer'>
+								<a class='card-footer-item' href='/collections/{{this._id}}'>Details</a>
+								<a class='card-footer-item js-modal-trigger' data-target='editCollectionForm-{{this._id}}'>Edit</a>
+								<a class='card-footer-item js-modal-trigger' data-target='deleteCollectionForm-{{this._id}}'>Delete</a>
+							</footer>
 						</div>
-						<footer class='card-footer'>
-							<a class='card-footer-item' href='/collections/{{this._id}}'>Details</a>
-							<a class='card-footer-item js-modal-trigger' data-target='editCollectionForm-{{this._id}}'>Edit</a>
-							<a class='card-footer-item js-modal-trigger' data-target='deleteCollectionForm-{{this._id}}'>Delete</a>
-						</footer>
 					</div>
-				</div>
-				<form action='/collections/{{this._id}}/edit' method='POST'>
-					<div class='modal' id='editCollectionForm-{{this._id}}'>
-						<div class='modal-background'></div>
-						<div class='modal-content'>
+					<form action='/collections/{{this._id}}/edit' method='POST'>
+						<div class='modal' id='editCollectionForm-{{this._id}}'>
 							<div class='modal-background'></div>
-							<div class='modal-card'>
-								<header class='modal-card-head'>
-									<p class='modal-card-title'>Edit Collection</p>
-									<span class='delete update-modal-close' aria-label='close'></span>
-								</header>
-								<section class='modal-card-body'>
-									<div class='field'>
-										<label class='label'>Collection Name</label>
-										<input type='text' id='update-text' name='name' class='input' value='{{this.name}}' />
-									</div>
-									<div class='field'>
-										<label class='label'>Description</label>
-										<textarea class='textarea has-fixed-size' name='description'>{{this.description}}</textarea>
-									</div>
-								</section>
-								<footer class='modal-card-foot'>
-									<button id='save' class='button is-success' type='submit'>Save changes</button>
-									<span class='button update-modal-close'>Cancel</span>
-								</footer>
+							<div class='modal-content'>
+								<div class='modal-background'></div>
+								<div class='modal-card'>
+									<header class='modal-card-head'>
+										<p class='modal-card-title'>Edit Collection</p>
+										<span class='delete update-modal-close' aria-label='close'></span>
+									</header>
+									<section class='modal-card-body'>
+										<div class='field'>
+											<label class='label'>Collection Name</label>
+											<input type='text' id='update-text' name='name' class='input' value='{{this.name}}' />
+										</div>
+										<div class='field'>
+											<label class='label'>Description</label>
+											<textarea class='textarea has-fixed-size' name='description'>{{this.description}}</textarea>
+										</div>
+									</section>
+									<footer class='modal-card-foot'>
+										<button id='save' class='button is-success' type='submit'>Save changes</button>
+										<span class='button update-modal-close'>Cancel</span>
+									</footer>
+								</div>
 							</div>
 						</div>
-					</div>
-				</form>
-				<form action='/collections/{{this._id}}/delete' method='POST'>
-					<div class='modal' id='deleteCollectionForm-{{this._id}}'>
-						<div class='modal-background'></div>
-						<div class='modal-content'>
+					</form>
+					<form action='/collections/{{this._id}}/delete' method='POST'>
+						<div class='modal' id='deleteCollectionForm-{{this._id}}'>
 							<div class='modal-background'></div>
-							<div class='modal-card'>
-								<header class='modal-card-head'>
-									<p class='modal-card-title'>Delete Collection</p>
-									<span class='delete update-modal-close' aria-label='close'></span>
-								</header>
-								<section class='modal-card-body'>
-									<div class='field'>
-										<label class='label'>
-											Are you sure you want to delete
-											{{this.name}}
-										</label>
-									</div>
-								</section>
-								<footer class='modal-card-foot'>
-									<button id='save' class='button is-success' type='submit'>Delete</button>
-									<span class='button update-modal-close'>Cancel</span>
-								</footer>
+							<div class='modal-content'>
+								<div class='modal-background'></div>
+								<div class='modal-card'>
+									<header class='modal-card-head'>
+										<p class='modal-card-title'>Delete Collection</p>
+										<span class='delete update-modal-close' aria-label='close'></span>
+									</header>
+									<section class='modal-card-body'>
+										<div class='field'>
+											<label class='label'>
+												Are you sure you want to delete
+												{{this.name}}
+											</label>
+										</div>
+									</section>
+									<footer class='modal-card-foot'>
+										<button id='save' class='button is-success' type='submit'>Delete</button>
+										<span class='button update-modal-close'>Cancel</span>
+									</footer>
+								</div>
 							</div>
 						</div>
-					</div>
-				</form>
-			{{/each}}
+					</form>
+				{{/each}}
+			</div>
 		</div>
-
+		<div class="content-tab" id="books" style="display:none">
+			<div class='columns tab-pane is-mobile is-flex is-flex-wrap-wrap'>
+				WORK IN PROGRESS
+			</div>
+		</div>
+		<div class="content-tab" id="follows" style="display:none">
+			<div class='columns tab-pane is-mobile is-flex is-flex-wrap-wrap'>
+				{{#each data.follows}}
+					<div class='column is-3-tablet is-6-mobile mx-auto'>
+						<div class='card'>
+							<div class='card-image'>
+								<figure class='image is-4by3'>
+									<img alt='' src='{{imageUrl}}' />
+								</figure>
+							</div>
+							<div class='card-content'>
+								<div class='content'>
+									<span class='tag is-dark subtitle'>Collections: {{collections.length}}</span>
+									<p class='title is-4'>{{username}}</p>
+									<p style='height: 1.5rem;white-space: nowrap; overflow: hidden;text-overflow: ellipsis'>{{description}}</p>
+								</div>
+							</div>
+							<footer class='card-footer'>
+								<a class='card-footer-item' href='/profile/{{username}}'>See profile</a>
+							</footer>
+						</div>
+					</div>
+				{{/each}}
+			</div>
+		</div>
 	</div>
 </div>
 

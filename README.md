@@ -41,3 +41,7 @@ Once the application is running, you can browse books from the Google API by usi
 To create a new collection, click the "New Collection" button and give your collection a name. To view your collections, click on your username in the navigation bar. From there, you can view, edit, and delete your collections, as well as remove books from collections if you so choose.
 
 To view collections from other users, click the "Users" link in the navigation bar and select a user. From there, you can view their collections and follow them.
+
+## Demo
+
+https://chapter-verse.adaptable.app

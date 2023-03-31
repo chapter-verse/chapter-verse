@@ -8,7 +8,7 @@ const isLoggedIn = require('../middleware/isLoggedIn');
 router.get('/', async (req, res) => {
 	if (req.session.currentUser) {
 		const currentUser = req.session.currentUser.username;
-		const userData = await User.findOne({ currentUser }).populate('collections');
+		const userData = await User.findOne({ username: req.session.currentUser.username }).populate('collections');
 		const collections = userData.collections;
 		const bookData = collections
 			.map((collection) => {

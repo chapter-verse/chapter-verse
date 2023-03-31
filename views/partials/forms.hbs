@@ -135,30 +135,6 @@
 	</div>
 </form>
 
-{{!-- EDIT COVER --}}
-
-<form action='/collections/{{this._id}}/edit-cover' method='post' enctype='multipart/form-data'>
-	<div class='modal' id='coverModal'>
-		<div class='modal-background'></div>
-		<div class='modal-card'>
-
-			<header class='modal-card-head'>
-				<p class='modal-card-title'>Edit collection cover</p>
-			</header>
-			<section class='modal-card-body'>
-                    <div class='control'>
-                        <label class='label'>Image format must be jpg or png</label>
-					<input type='file' name='cover' class='input' />
-				</div>
-			</section>
-			<footer class='modal-card-foot'>
-				<button class='button is-primary modal-save'>Save changes</button>
-				<span class='button update-modal-close'>Cancel</span>
-			</footer>
-		</div>
-	</div>
-</form>
-
 {{!-- DELETE --}}
 
 <form action='/collections/{{this._id}}/delete' method='POST'>

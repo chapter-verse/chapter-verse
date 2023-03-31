@@ -85,6 +85,7 @@ router.post('/:collectionsId/edit', (req, res, next) => {
 
 router.post('/:collectionsId/edit-cover', fileUploader.single('cover'), (req, res, next) => {
 	const { collectionsId } = req.params;
+    console.log(collectionsId)
 	Collection.findByIdAndUpdate(collectionsId, { imageUrl: req.file.path }, { new: true })
 		.then(() => {
 			res.redirect(`/collections/${collectionsId}`);

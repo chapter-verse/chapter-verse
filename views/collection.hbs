@@ -113,6 +113,7 @@
 	</div>
 </div>
 
+{{#if session.currentUser}}
 <form action='/collections/{{collection._id}}/edit-cover' method='post' enctype='multipart/form-data'>
 	<div class='modal' id='coverModal'>
 		<div class='modal-background'></div>
@@ -134,7 +135,5 @@
 		</div>
 	</div>
 </form>
-
-{{#if session.currentUser}}
 {{> forms }}
 {{/if}}

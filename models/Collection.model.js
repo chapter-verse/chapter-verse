@@ -12,6 +12,7 @@ const collectionSchema = new Schema(
 		},
 		books: {
 			type: [String],
+			default: [],
 		},
 		user: {
 			type: Schema.Types.ObjectId,
@@ -20,8 +21,8 @@ const collectionSchema = new Schema(
 		},
 		imageUrl: {
 			type: String,
-			default: 'https://res.cloudinary.com/dsbfbwbvq/image/upload/v1680046581/Chapter-Verse/dggnf8eabz4hw6hpc8ur.png'
-		}
+			default: 'https://res.cloudinary.com/dsbfbwbvq/image/upload/v1680046581/Chapter-Verse/dggnf8eabz4hw6hpc8ur.png',
+		},
 	},
 	{
 		timestamps: true,

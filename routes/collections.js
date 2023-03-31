@@ -1,45 +1,39 @@
 const router = require('express').Router();
 const User = require('../models/User.model');
 const Collection = require('../models/Collection.model');
-const session = require('express-session');
-const bcrypt = require('bcrypt');
 const axios = require('axios');
 const fileUploader = require('../config/cloudinary.config');
-const { collection } = require('../models/User.model');
 
 router.get('/collection-list', (req, res, next) => {
 	Collection.find()
-    .populate('user')
-	.then((data)=> {
-		res.render('collection-list', {data: data});
-	})
-	.catch((err) => {
-		console.log(err);
-		next(err);
-	});
+		.populate('user')
+		.then((data) => {
+			res.render('collection-list', { data: data });
+		})
+		.catch((err) => {
+			console.log(err);
+			next(err);
+		});
 });
 
-router
-	.route('/create')
-	.get((req, res) => {})
-	.post(async (req, res) => {
-		try {
-			const { name, description } = req.body;
-			const currentUser = req.session.currentUser.username;
-			const user = await User.findOne({ username: currentUser });
-			const collection = await Collection.create({
-				name,
-				description,
-				user: req.session.currentUser,
-			});
-			user.collections.push(collection);
-			await user.save();
-			await collection.save();
-			res.redirect(`/profile/${currentUser}`);
-		} catch (err) {
-			console.log(err);
-		}
-	});
+router.post('/create', async (req, res) => {
+	try {
+		const { name, description } = req.body;
+		const currentUser = req.session.currentUser.username;
+		const user = await User.findOne({ username: currentUser });
+		const collection = await Collection.create({
+			name,
+			description,
+			user: req.session.currentUser,
+		});
+		user.collections.push(collection);
+		await user.save();
+		await collection.save();
+		res.redirect(`/profile/${currentUser}`);
+	} catch (err) {
+		console.log(err);
+	}
+});
 
 router.get('/:collectionsId', async (req, res) => {
 	let verificationObject = {};

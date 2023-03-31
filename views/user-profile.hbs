@@ -1,3 +1,4 @@
+
 <div class='columns'>
 	<div class='container profile'>
 		<div class='section profile-heading'>
@@ -167,7 +168,33 @@
 		</div>
 		<div class="content-tab" id="books" style="display:none">
 			<div class='columns tab-pane is-mobile is-flex is-flex-wrap-wrap'>
-				WORK IN PROGRESS
+				{{#each favourites}}
+				<div class='column is-3 modal-button' data-target='modal-card'>
+					<div class='card is-shady'>
+						<div class='card-image'>
+							<figure class='image is-1by1'>
+								<img src='{{volumeInfo.imageLinks.thumbnail}}' alt='{{title}}' />
+							</figure>
+						</div>
+						<div class='card-content'>
+							<div class='content'>
+								<h4
+									style='height: 1.5rem;white-space: nowrap;overflow: hidden;text-overflow: ellipsis '
+								>{{volumeInfo.title}}</h4>
+								<p
+									style='height: 1.5rem;white-space: nowrap;overflow: hidden;text-overflow: ellipsis'
+								>{{volumeInfo.authors}}</p>
+								<div class='buttons'>
+									<a href='/books/{{id}}' class='button is-small is-warning modal-button'>Details</a>
+									<form action='/profile/{{id}}/unfavourite' method='POST' style='margin:0;'>
+                          		 	<button class='button is-small is-light is-danger' >Remove from Favourites</button>
+                       			 	</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				{{/each}}
 			</div>
 		</div>
 		<div class="content-tab" id="follows" style="display:none">

@@ -14,11 +14,11 @@
                       <a class="button is-info is-light js-modal-trigger" data-target="addToCollection">Add to Collection</a>
                      {{#if favourite}}
                         <form class='button p-0' action='/profile/{{book.id}}/unfavourite' method='POST' style='margin:0;'>
-                           <button class='button is-light is-danger'>Remove favourite</button>
+                           <button class='button is-light is-danger'>Remove from favourites</button>
                         </form>
                      {{else}}
                         <form class='button p-0' action='/profile/{{book.id}}/favourite' method='POST' style='margin:0;'>
-                           <button class="button is-light is-danger">Add favourite</button>
+                           <button class="button is-light is-success">Add to favourites</button>
                         </form>
                      {{/if}}
                   {{/if}}

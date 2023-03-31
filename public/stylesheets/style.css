@@ -6,7 +6,7 @@ html {
 	margin: 0;
 	padding: 0;
 	width: 100%;
-	min-height: 100vh;
+	min-height: 100%;
 	background-repeat: repeat;
 	background-attachment: fixed;
 	color: white !important;
@@ -101,4 +101,17 @@ a {
 	background-position: left;
 	background-size: cover;
 	position: relative;
+	overflow: hidden;
+}
+
+#homepageTitle {
+	font-family: 'Alkatra', cursive;
+}
+
+.profile-anchor:hover {
+	border-bottom: none;
+}
+
+.profile-anchor:focus {
+	color: unset;
 }
